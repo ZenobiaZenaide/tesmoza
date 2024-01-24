@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('https://th.bing.com/th/id/R.98ccff12d34eb963a529ebd30ca7ec55?rik=RKEYe%2fPNVjGtiw&riu=http%3a%2f%2fwww.baltana.com%2ffiles%2fwallpapers-2%2fRed-Background-Wallpaper-04293.png&ehk=P%2fmSd%2fH5CvL3Peh7rzVc9TRcea7QWJr6uqHc00MJDpI%3d&risl=&pid=ImgRaw&r=0');
+    background: url('../images/loginbackground.png');
     background-size: cover;
     background-position: center;
 }
