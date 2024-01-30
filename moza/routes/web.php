@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DivisionLeaderController;
+use App\Http\Controllers\UnitLeaderController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
@@ -20,5 +24,5 @@ Route::get('/', function () {
 });
 
 Route::get('/', function () {
-    return view('dashboardkpi');
+    return view('welcome');
 });

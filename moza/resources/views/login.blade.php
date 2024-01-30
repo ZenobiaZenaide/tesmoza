@@ -18,15 +18,25 @@
 <body>
     
     <div class ="wrapper">
-        <form action="">
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $item)
+                    <li>{{ $item }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <form action="" method="POST">
+            @csrf
             <h1>Monitoring Fallout</h1>
             
             <div class="input-box">
-                <input type="text" placeholder="Username" required>
+                <input type="text" value="{{ old('email') }}" name="id_employee" placeholder="id_employee" class="form-control">
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" class="form-control">
                     <i class='bx bxs-lock'></i>
 
             </div>
