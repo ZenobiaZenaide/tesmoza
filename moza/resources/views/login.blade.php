@@ -20,6 +20,7 @@
     <div class ="wrapper">
         <form action="">
             <h1>Monitoring Fallout</h1>
+            
             <div class="input-box">
                 <input type="text" placeholder="Username" required>
                 <i class='bx bxs-user'></i>
