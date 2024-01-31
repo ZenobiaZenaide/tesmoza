@@ -9,8 +9,13 @@ class DivisionLeaderController extends Controller
 {
     function divisionleader()
     {
-        echo "Halo, Selamat Datang Mr Division Leader";
-        echo "<h1>" . Auth::user()->name . "</h1>";
-        echo "<a href='logout'>Logout >></a>";
+        // Penanda
+
+        // echo "Halo, Selamat Datang Mr Division Leader";
+        // echo "<h1>" . Auth::user()->name . "</h1>";
+        // echo "<a href='logout'>Logout >></a>";
+
+        return view('dashboardkpi');
+
     }
 }
