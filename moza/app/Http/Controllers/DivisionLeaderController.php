@@ -18,4 +18,9 @@ class DivisionLeaderController extends Controller
         return view('dashboardkpi');
 
     }
+
+    function adduser()
+    {
+        return view('adduser');
+    }
 }

@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function() {
     // Route::get('/divisionleader',[DivisionLeaderController::class,'divisionleader'])->middleware('userAccess:divisionleader');
     Route::group(['middleware' => ['userAccess:divisionleader']], function () {
         Route::get('/divisionleader', [DivisionLeaderController::class, 'divisionleader']);
+        Route::get('/adduser', [DivisionLeaderController::class, 'adduser'])->name("adduser");
     });
 
     // Unit Leader Access

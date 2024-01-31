@@ -27,9 +27,9 @@
                 <h3>Rekap data Fallout</h3>
             </a>
             <hr />
-            <a href="#">
+            <a href="{{ route('adduser')}}">
                 <span class="material-icons-sharp">person</span>
-                <h3>Daftar User</h3>
+                <h3>Tambah User</h3>
             </a>
             <a href="logout">
                 <span class="material-icons-sharp">logout</span>

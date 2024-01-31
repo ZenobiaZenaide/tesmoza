@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 :root {
-    --color-primary: #7380ec;
+    --color-primary: #da5959;
     --color-danger: #ff7782;
     --color-success: #41f1b6;
     --color-warning: #ffbb55;
@@ -316,6 +316,11 @@ main .insights > div span {
     border-radius: var(--border-radius-1);
     color: var(--color-light);
     font-size: 2rem;
+}
+
+main .insights > div .middle {
+    display: flex;
+    align-items: center;
 }
 
 
