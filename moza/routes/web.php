@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function() {
     // Division Leader Access
     // Route::get('/divisionleader',[DivisionLeaderController::class,'divisionleader'])->middleware('userAccess:divisionleader');
     Route::group(['middleware' => ['userAccess:divisionleader']], function () {
-        Route::get('/divisionleader', [DivisionLeaderController::class, 'divisionleader']);
+        Route::get('/dashboardkpi', [DivisionLeaderController::class, 'dashboardkpi'])->name("dashboardkpi");
         Route::get('/adduser', [DivisionLeaderController::class, 'adduser'])->name("adduser");
     });
 

@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($infologin)){
             if (Auth::user()->role == 'divisionleader') {
-                return redirect('divisionleader');
+                return redirect('dashboardkpi');
             } elseif (Auth::user()->role == 'unitleader') {
                 return redirect('unitleader');
             } elseif (Auth::user()->role == 'employee') {

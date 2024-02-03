@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Fallout;
 
 class DivisionLeaderController extends Controller
 {
-    function divisionleader()
+    function dashboardkpi()
     {
-        // Penanda
+        $dataFallout = Fallout::all();
 
-        // echo "Halo, Selamat Datang Mr Division Leader";
-        // echo "<h1>" . Auth::user()->name . "</h1>";
-        // echo "<a href='logout'>Logout >></a>";
-
-        return view('dashboardkpi');
+        return view('dashboardkpi',compact('dataFallout'));
 
     }
 

@@ -14,7 +14,7 @@
 
         {{-- Konten Sidebar --}}
         <div class="sidebar">
-            <a href="#" class="active">
+            <a href="{{ route('dashboardkpi')}}" class="active">
                 <span class="material-icons-sharp">dashboard</span>    
                 <h3>Dashboard</h3>
             </a>

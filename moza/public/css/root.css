@@ -55,9 +55,9 @@ body {
 .container {
     display: grid;
     width: 96%;
-    margin: 0 auto;
+    margin: 0;
     gap: 1.8rem;
-    grid-template-columns: 14rem auto 23rem;
+    grid-template-columns: 14rem auto;
 }
 
 a {
@@ -165,6 +165,7 @@ b {
 aside {
     height: 100vh;
     background:  var(--color-background);
+    box-shadow: var(--box-shadow);
 }
 
 aside h3 {
@@ -184,6 +185,7 @@ aside .top .logo {
     display: flex;
     flex-direction: row;
     gap: 0.8rem;
+    margin-left: 1rem;
 }
 
 aside .logo img{
@@ -273,7 +275,8 @@ aside .sidebar a:hover span {
 /* ---------------------------- */
 /* Main dashboard Design */
 main {
-    margin-top: 1.4rem;
+    margin: 1.4rem;
+    margin-left: 4rem;
 }
 
 /* Styling Date Picker */
@@ -292,7 +295,7 @@ main .date input[type='date'] {
 
 main .insights {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); 
     gap:1.6rem;
 }
 
@@ -303,6 +306,13 @@ main .insights > div {
     margin-top: 1rem;
     box-shadow:  var(--box-shadow);
     transition: all 300ms ease;
+
+    /* flex: 1; 
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 8px; 
+    display: flex;
+    flex-direction: column; */
 }
 
 /* Styling on hover */
@@ -321,7 +331,65 @@ main .insights > div span {
 main .insights > div .middle {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    align-items: center;
 }
+
+main .insights h3 {
+    /* margin: 1rem 0 0.6rem; */
+    font-size: 1rem;
+}
+
+main .insights .progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main .insights svg  {
+    background: red;
+    width: 7rem;
+    height: 7rem;
+}
+
+/* Design Style Table fallout Dashboard */
+main .fallout-table {
+    margin-top: 2rem;
+}
+
+main .fallout-table h2 {
+    margin-bottom: 0.8rem;
+}
+
+main .fallout-table table {
+    background: var(--color-white);
+    width:100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    /* box-shadow: var(--box-shadow); */
+    transition: all 300ms ease; 
+}
+
+.fallout-table th {
+    padding-bottom: 2rem;
+}
+
+
+main table tbody td {
+    height: 3rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+main table tbody tr:last-child td {
+    border: none;
+    margin-bottom: 2rem;
+}
+
+
+
+
 
 
 
