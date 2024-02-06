@@ -2,12 +2,18 @@
 <div class="container">
     <x-sidebar />
         <main>
+            <div class="back">
+                <a href="{{ route('daftaruser')}}">
+                    <span class="material-icons-sharp">arrow_back_ios</span>
+                </a>
+                <p>Kembali</p>
+            </div>
             <form action="{{ route('create.account') }}" method="POST" class="formadduser-card">
                 @csrf
-                
                 <div class="title">
                     <h3>Tambah Akun DAMAN</h3>
                 </div>
+
                 <div class="form-fields">
                     {{-- Name --}}
                     <div class="fields">

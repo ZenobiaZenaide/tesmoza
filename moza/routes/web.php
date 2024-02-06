@@ -43,6 +43,9 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/dashboardkpi2', [DivisionLeaderController::class, 'dashboardkpi2'])->name("dashboardkpi2");
         Route::get('/detailkecepatankaryawan', [DivisionLeaderController::class, 'detailkecepatankaryawan'])->name("detailkecepatankaryawan");
         Route::get('/caridatafallout', [DivisionLeaderController::class, 'caridatafallout'])->name("caridatafallout");
+        Route::get('/daftaruser', [DivisionLeaderController::class, 'daftaruser'])->name("daftaruser");
+        Route::get('/edituser', [DivisionLeaderController::class, 'edituser'])->name("edituser");
+        Route::get('/editfallout', [DivisionLeaderController::class, 'editfallout'])->name("editfallout");
     });
 
     // Unit Leader Access

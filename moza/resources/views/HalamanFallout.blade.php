@@ -58,11 +58,9 @@
             
             <div class="fallout-table">
                 <div class="table-additions">
-                    <form action="{{ route('caridatafallout')}}" method="GET">
-                        <div class="search-bar">
+                    <form class="search-bar" action="{{ route('caridatafallout')}}" method="GET">
                             <input type="search" name="search" value="{{ request('search') }}" id="searchbar" name="searchbar">
                             <span class="material-icons-sharp">search</span>
-                        </div>
                     </form>
                     <div class="filter">
                         <p> Export ke Excel</p>
@@ -83,6 +81,7 @@
                             <th>PIC</th>
                             <th>Status</th>
                             <th>KET</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,6 +93,14 @@
                             <td>{{ $data['pic'] }}</td>
                             <td>{{ $data['status'] }}</td>
                             <td>{{ $data['ket'] }}</td>
+                            <td>
+                                <a href="{{ route('editfallout') }}">
+                                    <span class="material-icons-outlined">edit</span>
+                                </a>
+                                <a href="#">
+                                    <span class="material-icons-outlined">delete</span>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

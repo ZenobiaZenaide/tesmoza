@@ -198,4 +198,31 @@ class DivisionLeaderController extends Controller
 
         return view('/halamanFallout',compact('dataFallout'));
     }
+
+    public function daftaruser() {
+        $pagination = 10;
+        $dataFallout = Fallout::paginate($pagination);
+
+        // Variabel berdasarkan status
+        $falloutPi = Fallout::Where('status','PI (Provision Issues)');
+        $falloutPs = Fallout::Where('status','PS (Completed)');
+        $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
+        $falloutCapul = Fallout::Where('status','Capul / Revoke');
+
+        return view('daftaruser',[
+            'dataFallout' => $dataFallout,
+            'falloutPi' => $falloutPi,
+            'falloutPs' => $falloutPs,
+            'falloutEskalasi' => $falloutEskalasi,
+            'fallout' => $falloutCapul,
+        ]);
+    }
+
+    public function edituser() {
+        return view('edituser');
+    }
+
+    public function editfallout() {
+        return view('editfallout');
+    }
 }

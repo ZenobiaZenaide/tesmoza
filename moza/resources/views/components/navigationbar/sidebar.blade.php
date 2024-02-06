@@ -31,6 +31,10 @@
                 <span class="material-icons-sharp">person</span>
                 <h3>Tambah User</h3>
             </a>
+            <a href="{{ route('daftaruser')}}">
+                <span class="material-icons-sharp">person</span>
+                <h3>Daftar User</h3>
+            </a>
             <a href="logout">
                 <span class="material-icons-sharp">logout</span>
                 <h3>Logout</h3>
