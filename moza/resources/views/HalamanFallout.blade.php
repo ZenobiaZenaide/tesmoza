@@ -58,10 +58,12 @@
             
             <div class="fallout-table">
                 <div class="table-additions">
-                    <div class="search-bar">
-                        <input type="text" id="searchbar" name="searchbar">
-                        <span class="material-icons-sharp">search</span>
-                    </div>
+                    <form action="{{ route('caridatafallout')}}" method="GET">
+                        <div class="search-bar">
+                            <input type="search" name="search" value="{{ request('search') }}" id="searchbar" name="searchbar">
+                            <span class="material-icons-sharp">search</span>
+                        </div>
+                    </form>
                     <div class="filter">
                         <p> Export ke Excel</p>
                         <span class="material-icons-sharp">save_as</span>

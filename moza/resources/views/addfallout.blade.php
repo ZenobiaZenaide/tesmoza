@@ -55,7 +55,7 @@
                     </div>
     
                     <div class="fields-button">
-                        <button type="/submit" disabled>Submit</button>
+                        <button type="submit" >Submit</button>
                     </div>
                 </div>
             </form>

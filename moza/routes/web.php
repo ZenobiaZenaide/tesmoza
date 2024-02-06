@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/addfallout', [DivisionLeaderController::class, 'addfallout'])->name("addfallout");
         Route::get('/dashboardkpi2', [DivisionLeaderController::class, 'dashboardkpi2'])->name("dashboardkpi2");
         Route::get('/detailkecepatankaryawan', [DivisionLeaderController::class, 'detailkecepatankaryawan'])->name("detailkecepatankaryawan");
+        Route::get('/caridatafallout', [DivisionLeaderController::class, 'caridatafallout'])->name("caridatafallout");
     });
 
     // Unit Leader Access

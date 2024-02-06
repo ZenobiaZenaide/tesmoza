@@ -669,8 +669,9 @@ main .detail-container-1 {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    height: 50vh;
+    height: auto;
     gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 main .detail-container-1 .biodata {
@@ -687,6 +688,69 @@ main .detail-container-1 .kecepatankaryawan-linechart{
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius-2);
 }
+
+/* bagian biodata karyawan */
+main .detail-container-1 .biodata .profile-picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+main .detail-container-1 .biodata .profile-picture .circle {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 100%;
+    background-color: var(--color-dark-variant);
+}
+
+main .detail-container-1 .biodata .namakaryawan {
+    display: flex;
+    font-size: 2.5rem;
+    background-color: var(--color-background);
+    margin-top: 2rem;
+    border-radius: var(--border-radius-2);
+    padding: 1rem;
+
+}
+
+main .detail-container-1 .biodata .detail-biodata .dropdown-edit-role {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius-3);
+    padding: 1.25rem;
+    height: 5rem;
+    width: 100%;
+}
+
+main .detail-container-1 .biodata .detail-biodata .biodata-1 {
+    width: 100%;
+    height: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+main .detail-container-1 .biodata .detail-biodata .biodata-1 .biodata-1-judul{
+    font-weight: bold; 
+}
+
+main .detail-container-1 .biodata .detail-biodata {
+    padding: 2rem;
+    margin: 1rem;
+}
+
+main .detail-container-1 .biodata .detail-biodata .biodata-1 .biodata-1-isi{
+   display: flex;
+}
+
+
+main .detail-container-1 .biodata .detail-biodata .biodata-1 .biodata-1-isi .titik-dua{
+    margin-right: 2rem;
+}
+
+
+
 
 
 

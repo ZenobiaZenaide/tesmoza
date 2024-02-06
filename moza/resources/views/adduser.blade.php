@@ -20,7 +20,7 @@
 
                 <div class="fields">
                     <label for="password">Username: </label>
-                    <input type="text" id="password" name="password" required>
+                    <input type="password" id="password" name="password" required>
                 </div>
 
                 <div class="fields">

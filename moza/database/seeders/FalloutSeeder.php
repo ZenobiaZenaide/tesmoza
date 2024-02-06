@@ -15,7 +15,7 @@ class FalloutSeeder extends Seeder
     public function run(): void
     {
         DB::table('fallout')->insert([
-            'order_id' => '123456789',
+            'order_id' => '131313131',
             'status_message' => 'Provisioning Failed|UIM|IN170673571|1030:No Physical Port available with Name : 1/0/6/8',
             'sto' => 'JKT',
             'tanggal_fallout' => '12/12/20',
