@@ -21,7 +21,6 @@
                 </div>
 
                 <div class="fields">
-<<<<<<< HEAD
                     <label for="password">Username: </label>
                     <input type="password" id="password" name="password" required>
                 </div>
@@ -34,13 +33,11 @@
                         <option value="orange">Orange</option>
                         <option value="grape">Grape</option>
                         <option value="strawberry">Strawberry</option>
-=======
                     <label for="role">nanti buat dropdown </label>
                     <select id="role" name="role">
                         <option value="Division Leader">Division Leader</option>
                         <option value="Unit Leader">Unit Leader</option>
                         <option value="Employee">Employee</option>
->>>>>>> 5af6916039222d223a1a54bc64725dd991428b35
                     </select>
                 </div>
 

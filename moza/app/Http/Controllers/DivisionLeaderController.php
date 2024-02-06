@@ -181,4 +181,21 @@ class DivisionLeaderController extends Controller
             'fallout' => $falloutCapul,
         ]);
     }
+
+        
+    public function caridatafallout(Request $request) {
+
+        $dataFallout = Fallout::select('order_id','sto','tanggal_fallout','pic','status','ket');
+
+        if ($request->get('search')) {
+            $dataFallout =  $dataFallout->Where('order_id','LIKE', '%' .$request->get('search').'%')
+                                        ->orWhere('pic', 'LIKE', '%' .$request->get('search').'%')
+                                        ->orWhere('sto', 'LIKE', '%' .$request->get('search').'%')
+                                        ->orWhere('status', 'LIKE', '%' .$request->get('search').'%')
+                                        ->orWhere('ket', 'LIKE', '%' .$request->get('search').'%');
+        } 
+        $dataFallout = $dataFallout->paginate(10);
+
+        return view('/halamanFallout',compact('dataFallout'));
+    }
 }
