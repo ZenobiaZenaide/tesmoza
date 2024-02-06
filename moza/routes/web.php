@@ -6,6 +6,9 @@ use App\Http\Controllers\UnitLeaderController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
+// Charts
+use App\Http\Charts\FalloutStatusChart;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +26,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::get('/home', function () {
-    return redirect('/divisionleader');
+    return redirect('/login');
 });
 
 Route::middleware(['auth'])->group(function() {
@@ -33,6 +36,10 @@ Route::middleware(['auth'])->group(function() {
     Route::group(['middleware' => ['userAccess:divisionleader']], function () {
         Route::get('/dashboardkpi', [DivisionLeaderController::class, 'dashboardkpi'])->name("dashboardkpi");
         Route::get('/adduser', [DivisionLeaderController::class, 'adduser'])->name("adduser");
+        Route::get('/halamanFallout', [DivisionLeaderController::class, 'halamanFallout'])->name("halamanFallout");
+        Route::get('/addfallout', [DivisionLeaderController::class, 'addfallout'])->name("addfallout");
+        Route::get('/dashboardkpi2', [DivisionLeaderController::class, 'dashboardkpi2'])->name("dashboardkpi2");
+        Route::get('/detailkecepatankaryawan', [DivisionLeaderController::class, 'detailkecepatankaryawan'])->name("detailkecepatankaryawan");
     });
 
     // Unit Leader Access

@@ -3,9 +3,17 @@
 <div class="container">
     <x-sidebar />
     <main>
-        <h1>Dashboard</h1>
-        <div class="date">
+        {{-- <div class="date">
             <input type="date">
+        </div> --}}
+
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h2>Welcome, Benny! </h2>
+            </div>
+            <div class="dashboard-switch">
+                <a href=" {{route('dashboardkpi2')}}" class="dashboard-btn-switch">Switch</a>
+            </div>
         </div>
 
         <div class="insights">
@@ -62,34 +70,54 @@
             </div>
         </div>
         
-        <div class="fallout-table">
-            <h2>Detail Fallout</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order_id</th>
-                        <th>STO</th>
-                        <th>Tanggal Fallout</th>
-                        <th>PIC</th>
-                        <th>Status</th>
-                        <th>KET</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($dataFallout as $data)
-                    <tr>
-                        <td>{{ $data['order_id'] }}</td>
-                        <td>{{ $data['sto'] }}</td>
-                        <td>{{ $data['tanggal_fallout'] }}</td>
-                        <td>{{ $data['pic'] }}</td>
-                        <td>{{ $data['status'] }}</td>
-                        <td>{{ $data['ket'] }}</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+        <div class="dashboard-body">
+            <div class="dashboard-body-right">
+                <div class="totalsubmitted-card">
+                    <div class="content">
+                        <div class="content-left">
+                            <p> Total Fallout Telah Tersubmisi </p>
+                            <h2> 20 </h2>
+                        </div>
+                        <div class="content-right">
+                            <span class="material-icons-outlined">check_circle </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="falloutStatus-Chart">
+                    {!! $falloutStatusChart->container() !!}
+                </div>
+            </div>
+
+            <div class="fallout-table">
+                <h2>Top 10 Submisi Data Fallout Tercepat</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order_id</th>
+                            <th>STO</th>
+                            <th>Tanggal Fallout</th>
+                            <th>PIC</th>
+                            <th>Status</th>
+                            <th>KET</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($dataFallout as $data)
+                        <tr>
+                            <td>{{ $data['order_id'] }}</td>
+                            <td>{{ $data['sto'] }}</td>
+                            <td>{{ $data['tanggal_fallout'] }}</td>
+                            <td>{{ $data['pic'] }}</td>
+                            <td>{{ $data['status'] }}</td>
+                            <td>{{ $data['ket'] }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <br />
+                {{ $dataFallout->links() }}
+            </div>
         </div>
-        <button onclick="updateUI()">Update UI</button>
     </main>
 </div>
 
@@ -147,3 +175,7 @@
         });
     }
 </script>
+
+<script src="{{ $falloutStatusChart->cdn() }}"></script>
+
+{{ $falloutStatusChart->script() }}

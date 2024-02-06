@@ -7,7 +7,10 @@
 
     {{-- Link API's and stylesheet --}}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel='stylesheet' href="{{ asset('css/root.css') }}">
+    <link rel='stylesheet' href="{{ asset('css/output.css') }}">
+
 
     {{-- Link Scripts --}}
    
@@ -16,6 +19,12 @@
     <title>Sidebar</title>
 </head>
 <body>
-@yield('content')   
+@yield('content') 
+
+{{-- Link Javascript --}}
+
 </body>
 </html>
+
+
+

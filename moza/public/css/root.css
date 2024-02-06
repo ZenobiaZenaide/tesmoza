@@ -6,7 +6,9 @@
     --color-primary: #da5959;
     --color-danger: #ff7782;
     --color-success: #41f1b6;
+    --color-on-success: #00695C;
     --color-warning: #ffbb55;
+    --color-on-warning: #B98E21;
     --color-white: #fff;
     --color-info-dark: #7d8da1;
     --color-info-light: rgba(132, 139, 200, 0.18);
@@ -163,9 +165,11 @@ b {
 }
 
 aside {
+    position: fixed;
     height: 100vh;
     background:  var(--color-background);
     box-shadow: var(--box-shadow);
+    width: 20vh;
 }
 
 aside h3 {
@@ -277,6 +281,7 @@ aside .sidebar a:hover span {
 main {
     margin: 1.4rem;
     margin-left: 4rem;
+    margin-right: 6rem;
 }
 
 /* Styling Date Picker */
@@ -291,6 +296,10 @@ main .date {
 main .date input[type='date'] {
     background: transparent;
     color:var(--color-dark);
+}
+
+main .date input[type='date']:first-child{
+    margin-right: 2rem;
 }
 
 main .insights {
@@ -352,10 +361,97 @@ main .insights svg  {
     height: 7rem;
 }
 
-/* Design Style Table fallout Dashboard */
-main .fallout-table {
-    margin-top: 2rem;
+/* Dashbord body */
+main .dashboard-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 2rem;
 }
+
+/* Styling header dashboard */
+main .dashboard-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--color-primary);
+    height: 4rem;
+    border-radius: var(--border-radius-2);
+    box-shadow: var(--box-shadow);
+    color: var(--color-white);
+    padding: 1rem;
+}
+
+main .dashboard-header .dashboard-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: var(--color-white);
+}
+
+main .dashboard-header .dashboard-switch {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+main .dashboard-header .dashboard-btn-switch{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--color-white);
+}
+
+main .dashboard-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--color-primary);
+    height: 4rem;
+    border-radius: var(--border-radius-2);
+    box-shadow: var(--box-shadow);
+}
+
+
+main .dashboard-body-right {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+}
+
+main .dashboard-body .totalsubmitted-card {
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border: 1px solid var(--color-on-success);
+    border-radius: var(--card-border-radius);
+    box-shadow:  var(--box-shadow);
+    height: 100%;
+    width: auto;
+}
+
+main .dashboard-body .totalsubmitted-card .content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+
+} 
+
+
+main .dashboard-body .totalsubmitted-card .content .content-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+} 
+
+main .dashboard-body .totalsubmitted-card .content .content-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+} 
+
+main .dashboard-body .totalsubmitted-card .content .content-right > span {
+    color: var(--color-on-success);
+    font-size: 3rem;
+} 
 
 main .fallout-table h2 {
     margin-bottom: 0.8rem;
@@ -372,12 +468,13 @@ main .fallout-table table {
 }
 
 .fallout-table th {
+    padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
 
 main table tbody td {
-    height: 3rem;
+    height: 4rem;
     border-bottom: 1px solid var(--color-light);
     color: var(--color-dark-variant);
 }
@@ -386,6 +483,219 @@ main table tbody tr:last-child td {
     border: none;
     margin-bottom: 2rem;
 }
+
+main .falloutStatus-Chart {
+    height: auto;
+    margin-top: 2rem;
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow:  var(--box-shadow);
+}
+
+/* Design form add User blade */
+main .formadduser-card {
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow:  var(--box-shadow);
+    height: auto;
+    width: 100%
+}
+
+.formadduser-card .title {
+    font-size: 1rem;
+    padding: 1rem 0 2rem 0;
+}
+
+.formadduser-card  .form-fields {
+    display: grid;
+    gap: 4rem;
+}
+
+.formadduser-card .form-fields .fields label{
+    margin: 1rem 0;
+}
+
+.formadduser-card  .form-fields .fields {
+    display:flex;
+    flex-direction: column;
+    height: 4rem;
+}
+
+.formadduser-card .form-fields .fields input[type='text'] {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius-3);
+    padding: var(--card-padding);
+    height: 2rem;
+    width: 100%;
+}
+
+.formadduser-card .form-fields .fields select {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius-3);
+    padding: 1.25rem;
+    height: 5rem;
+    width: 100%;
+}
+
+/* Button Styling */
+.formadduser-card .form-fields .fields-button {
+    height: 4rem;
+    width: 100%;
+    margin-top: 2rem;
+    display:  flex;
+    justify-content: flex-end;
+}
+
+.formadduser-card .form-fields .fields-button button {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    height: 3rem;
+    width: auto;
+    padding: 0 2rem;
+    border-radius: var(--border-radius-3);
+}
+
+/* Design Halaman fallout */
+
+main .fallout-table .table-additions{
+    display: flex;
+    flex-direction: columns;
+    justify-content: flex-end;
+    height: 3rem;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+/* Searchbar */
+main .fallout-table .table-additions .search-bar{
+    color: var(--color-dark-variant);
+    background-color: var(--color-white);
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    border-radius: var(--border-radius-2);
+    border: 1px solid var(--color-light);
+}
+
+main .fallout-table .table-additions .search-bar input[type=text]{
+    background: transparent;
+}
+
+main .fallout-table .table-additions .add-items{
+    color: var(--color-dark-variant);
+    background-color: var(--color-white);
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    border-radius: var(--border-radius-2);
+    border: 1px solid var(--color-light);
+}
+
+main .fallout-table .table-additions .filter{
+    color: var(--color-dark-variant);
+    background-color: var(--color-white);
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    border-radius: var(--border-radius-2);
+    border: 1px solid var(--color-light);
+}
+
+main .fallout-table .table-additions p{
+    margin-right: 0.5rem;
+}
+
+
+main .back {
+    background: var(--color-white);
+    padding: var(--card-padding);
+    padding-left: 1rem;
+    border-radius: var(--card-border-radius);
+    box-shadow:  var(--box-shadow);
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+main .back p{
+    margin-left: 1rem;
+}
+
+main .fallout-table {
+    margin-top: 2rem;
+    background: var(--color-white);
+    padding: var(--card-padding);
+    padding-left: 1rem;
+    border-radius: var(--card-border-radius);
+    box-shadow:  var(--box-shadow);
+    width: 100%;
+}
+
+form .button-start-stop {
+    height: 3rem;
+    width: 100%;
+    display:  flex;
+    justify-content: flex-end;
+}
+
+form .button-start-stop .start{
+    background-color: var(--color-background);
+    border: 1px solid var(--color-success);
+    color: var(--color-on-success);
+    height: 3rem;
+    padding: 0 2rem;
+    border-radius: var(--border-radius-2);
+}
+
+form .button-start-stop .stop{
+    background-color: var(--color-background);
+    border: 1px solid var(--color-warning);
+    color: var(--color-on-warning);
+    height: 3rem;
+    padding: 0 2rem;
+    margin-left: 1rem;
+    border-radius: var(--border-radius-2);
+}
+/* Design dashboard KPI 2 */
+
+main .detail-container-1 {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 50vh;
+    gap: 2rem;
+}
+
+main .detail-container-1 .biodata {
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-2)
+
+}
+
+main .detail-container-1 .kecepatankaryawan-linechart{
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-2);
+}
+
+
+
+
+
+
+
+
+
 
 
 
