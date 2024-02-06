@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fallout extends Model
 {
+    use HasFactory;
+
     public $timestamp = false;
     
     protected $table = 'fallout';
@@ -24,9 +26,13 @@ class Fallout extends Model
         'ket',
         'created_at',
         'end_at',
-        'updatetd_at'
+        'updated_at'
     ];
 
+    // Tentukan kolom timestamp yang ingin Anda gunakan
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'end_at';
+    
     public static function rules() {
         return [
             'order_id' => 'required|string|min:9|max:9',

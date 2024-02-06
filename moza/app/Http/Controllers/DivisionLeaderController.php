@@ -89,7 +89,7 @@ class DivisionLeaderController extends Controller
             'order_id' => 'required|string',
             'status_message' => 'required|string',
             'sto' => 'required|string',
-            'status' => 'required|string|in:PS (Completed),Capul/Revoke,PI (Provission Issue),Eskalasi',
+            'status' => 'required|string|in:PS (Completed),PI (Provision Issues),Capul/Revoke,Eskalasi',
             'ket' => $request->status === 'Eskalasi' ? 'required|string' : '',
         ]);
 
@@ -112,7 +112,7 @@ class DivisionLeaderController extends Controller
         $fallout->update(['end_at' => now()->format('H:i:s')]);
 
         // Redirect atau response sesuai kebutuhan
-        return redirect()->route('dashboardkpi')->with('success', 'Data Fallout berhasil disimpan!');
+        return redirect()->route('halamanFallout')->with('success', 'Data Fallout berhasil disimpan!');
     }
 
 
