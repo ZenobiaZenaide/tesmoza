@@ -36,8 +36,10 @@ Route::middleware(['auth'])->group(function() {
     Route::group(['middleware' => ['userAccess:divisionleader']], function () {
         Route::get('/dashboardkpi', [DivisionLeaderController::class, 'dashboardkpi'])->name("dashboardkpi");
         Route::get('/adduser', [DivisionLeaderController::class, 'adduser'])->name("adduser");
+        Route::post('/create-account', [DivisionLeaderController::class, 'createAccount'])->name('create.account');
         Route::get('/halamanFallout', [DivisionLeaderController::class, 'halamanFallout'])->name("halamanFallout");
         Route::get('/addfallout', [DivisionLeaderController::class, 'addfallout'])->name("addfallout");
+        Route::post('/addfallout', [DivisionLeaderController::class, 'store'])->name("store_data_fallout");
         Route::get('/dashboardkpi2', [DivisionLeaderController::class, 'dashboardkpi2'])->name("dashboardkpi2");
         Route::get('/detailkecepatankaryawan', [DivisionLeaderController::class, 'detailkecepatankaryawan'])->name("detailkecepatankaryawan");
     });

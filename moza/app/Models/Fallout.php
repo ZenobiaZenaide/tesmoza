@@ -21,7 +21,10 @@ class Fallout extends Model
         'tanggal_fallout',
         'pic',
         'status',
-        'ket'
+        'ket',
+        'created_at',
+        'end_at',
+        'updatetd_at'
     ];
 
     public static function rules() {
