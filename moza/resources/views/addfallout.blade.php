@@ -29,30 +29,36 @@
                     <input type="text" id="sto" name="sto" required>
                 </div>
 
-                    <div class="fields">
-                        <label for="ket">Keterangan : </label>
-                        <input type="text" id="ket" name="ket" required>
-                    </div>
-
-                    <div class="fields">
-                        <label for="pic">PIC : </label>
-                        <input type="text" id="pic" name="pic" required>
-                    </div>
-    
-                    <div class="fields">
-                        <label for="status">nanti buat dropdown </label>
-                        <select id="fruitDropdown">
-                            <option value="Eskalasi">Eskalasi</option>
-                            <option value="PI (Provision Issues)">PI (Provission Issue)</option>
-                            <option value="PS (Completed)">PS (Completed)</option>
-                            <option value="Capul / Revoke">Capul / Revoke</option>
-                        </select>
-                    </div>
-    
-                    <div class="fields-button">
-                        <button type="/submit" disabled>Submit</button>
-                    </div>
+                <div class="fields">
+                    <label for="status">Status: </label>
+                    <select id="status" name="status">
+                        <option value="PS (Completed)">PS (Completed)</option>
+                        <option value="Eskalasi">Eskalasi</option>
+                        <option value="PI (Provision Issues)">PI (Provision Issues)</option>
+                        <option value="Capul/Revoke">Capul/Revoke</option>
+                    </select>
                 </div>
-            </form>
-        <main>
-    </div>
+
+                <div class="fields" id="ket_input" style="display: none;">
+                    <label for="ket">Keterangan : </label>
+                    <input type="text" id="ket" name="ket">
+                </div>
+
+                <div class="fields-button">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script>
+    document.getElementById('status').addEventListener('change', function () {
+        var ketInput = document.getElementById('ket_input');
+        if (this.value === 'Eskalasi') {
+            ketInput.style.display = 'block';
+        } else {
+            ketInput.style.display = 'none';
+        }
+    });
+</script>
