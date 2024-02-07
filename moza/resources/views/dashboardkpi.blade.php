@@ -1,21 +1,43 @@
-
-
 <div class="container">
     <x-sidebar />
     <main>
-        {{-- <div class="date">
-            <input type="date">
-        </div> --}}
-
         <div class="dashboard-header">
             <div class="dashboard-title">
-                <h2>Welcome, Benny! </h2>
+                <div class="profile-picture">
+                    <div class="circle">
+                        
+                    </div>
+               </div>
+               <p> Welcome, Benny! </p>
             </div>
-            <div class="dashboard-switch">
-                <a href=" {{route('dashboardkpi2')}}" class="dashboard-btn-switch">Switch</a>
+            <div class="header-content">
+                <form action={{ route('filtertanggal')}} method="get" class="periode">
+                    <div class="date">
+                        <label for="date-start">Mulai : </label>
+                        <input type="date" id="date_start" name="date_start" value="{{ request('date_stath') }}">
+                    </div>
+                    <div class="date">
+                        <label for="date-end">Berakhir : </label>
+                        <input type="date" id="date_end" name="date_end" value="{{ request('date_end') }}">
+                    </div>
+                    <div class="spacing">
+                        <div class="filter-date">
+                            <button class="submit-date" id="submit" value="search">Filter</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="dashboard-switch">
+                    <div class="switch">
+                        <a href=" {{route('dashboardkpi2')}}" class="dashboard-btn-switch">Switch To KPI</a>
+                        <span class="material-icons-outlined">arrow_forward_ios</span>
+                    </div>
+                </div>
+            </div>
+            <div class="line-break">
+
             </div>
         </div>
-
+        
         <div class="insights">
             <div class="sales"  onclick="toggleFilter('PS (Complete)')">
                 <div class="middle">

@@ -3,10 +3,38 @@
     <main>
         <div class="dashboard-header">
             <div class="dashboard-title">
-                <h2>Welcome, Benny! </h2>
+                <div class="profile-picture">
+                    <div class="circle">
+                        
+                    </div>
+               </div>
+               <p> Welcome, Benny! </p>
             </div>
-            <div class="dashboard-switch">
-                <a href=" {{route('dashboardkpi')}}" class="dashboard-btn-switch">Switch</a>
+            <div class="header-content">
+                <form action={{ route('dashboardkpi2_filtertanggal')}} method="get" class="periode">
+                    <div class="date">
+                        <label for="date-start">Mulai : </label>
+                        <input type="date" id="date_start" name="date_start" value="{{ request('date_start') }}">
+                    </div>
+                    <div class="date">
+                        <label for="date-end">Berakhir : </label>
+                        <input type="date" id="date_end" name="date_end" value="{{ request('date_end') }}">
+                    </div>
+                    <div class="spacing">
+                        <div class="filter-date">
+                            <button class="submit-date" id="submit" value="search">Filter</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="dashboard-switch">
+                    <div class="switch">
+                        <a href=" {{route('dashboardkpi')}}" class="dashboard-btn-switch">Switch To Fallout</a>
+                        <span class="material-icons-outlined">arrow_forward_ios</span>
+                    </div>
+                </div>
+            </div>
+            <div class="line-break">
+                
             </div>
         </div>
 
@@ -16,17 +44,19 @@
 
         
         <div class="fallout-table">
-            <h2>Top 10 Submisi Data Fallout Tercepat</h2>
+            <div class="table-additions">
+                <form class="search-bar" action="#" method="GET">
+                        <input type="search" name="search" value="#" id="searchbar" name="searchbar">
+                        <span class="material-icons-sharp">search</span>
+                </form>
+            </div>
             <table>
                 <thead>
                     <tr>
-                        <th>Order_id</th>
-                        <th>STO</th>
-                        <th>Tanggal Fallout</th>
-                        <th>PIC</th>
-                        <th>Status</th>
-                        <th>KET</th>
-                        <th>Aksi</th>
+                        <th>Employee ID</th>
+                        <th>Nama</th>
+                        <th>Total Submisi Fallout</th>
+                        <th>Kecepatan Rata - Rata</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,8 +66,6 @@
                         <td>{{ $data['sto'] }}</td>
                         <td>{{ $data['tanggal_fallout'] }}</td>
                         <td>{{ $data['pic'] }}</td>
-                        <td>{{ $data['status'] }}</td>
-                        <td>{{ $data['ket'] }}</td>
                         <td>
                             <a href="{{route('detailkecepatankaryawan')}}">
                             <span class="material-icons-outlined"> visibility </span>

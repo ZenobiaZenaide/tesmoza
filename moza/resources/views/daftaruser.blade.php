@@ -23,7 +23,7 @@
                             <th>PIC</th>
                             <th>Status</th>
                             <th>KET</th>
-                            <th>Aksi</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +35,7 @@
                             <td>{{ $data['pic'] }}</td>
                             <td>{{ $data['status'] }}</td>
                             <td>{{ $data['ket'] }}</td>
-                            <td>
+                            <td class="aksi">
                                 <a href="{{ route('edituser') }}">
                                     <span class="material-icons-outlined">edit</span>
                                 </a>

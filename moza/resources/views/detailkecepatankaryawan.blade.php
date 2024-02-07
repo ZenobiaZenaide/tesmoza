@@ -75,15 +75,6 @@
                     <input type="text" id="searchbar" name="searchbar">
                     <span class="material-icons-sharp">search</span>
                 </div>
-                <div class="filter">
-                    <p> Export ke Excel</p>
-                    <span class="material-icons-sharp">save_as</span>
-                </div>
-                <div class="add-items">
-                    <a href="{{ route('addfallout')}}">
-                    <span class="material-icons-sharp">add</span>
-                    </a>
-                </div>
             </div>
             <table>
                 <thead>

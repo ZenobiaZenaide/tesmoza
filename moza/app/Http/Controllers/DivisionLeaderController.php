@@ -9,12 +9,15 @@ use App\Models\Fallout;
 use App\Charts\FalloutStatusChart;
 use App\Charts\KecepatanKaryawanChart;
 use App\Charts\DetailKecepatanKaryawanChart;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class DivisionLeaderController extends Controller
 {
     function dashboardkpi(FalloutStatusChart $falloutStatusChart)
     {   
+        
         // Charts
         // $data[]
         // Kepentingan Pagination data
@@ -30,6 +33,40 @@ class DivisionLeaderController extends Controller
         return view('dashboardkpi',[
             'falloutStatusChart' => $falloutStatusChart->build(),
             'dataFallout' => $dataFallout,
+            'falloutPi' => $falloutPi,
+            'falloutPs' => $falloutPs,
+            'falloutEskalasi' => $falloutEskalasi,
+            'falloutCapul' => $falloutCapul
+        ]);
+    }
+
+    function filtertanggal(FalloutStatusChart $falloutStatusChart, Request $request)
+    {   
+        
+        $dataFallout = Fallout::select('order_id','sto','tanggal_fallout','pic','status','ket')
+                        ->when(
+                            $request->date_start && $request->date_end,
+                            function (Builder $builder) use ($request) {
+                                $builder->whereBetween(
+                                    DB::raw('DATE(tanggal_fallout)'),
+                                    [
+                                        $request->date_start,
+                                        $request->date_end,
+                                    ]
+                                );
+                            }
+                        )->paginate(10);
+
+        // Variabel berdasarkan status
+        $falloutPi = Fallout::Where('status','PI (Provision Issues)');
+        $falloutPs = Fallout::Where('status','PS (Completed)');
+        $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
+        $falloutCapul = Fallout::Where('status','Capul / Revoke');
+
+        return view('dashboardkpi',[
+            'request' => $request,
+            'dataFallout' => $dataFallout,
+            'falloutStatusChart' => $falloutStatusChart->build(),
             'falloutPi' => $falloutPi,
             'falloutPs' => $falloutPs,
             'falloutEskalasi' => $falloutEskalasi,
@@ -160,6 +197,44 @@ class DivisionLeaderController extends Controller
             'fallout' => $falloutCapul,
         ]);
     }
+
+
+
+    function dashboardkpi2_filtertanggal(KecepatanKaryawanChart $chart, Request $request)
+    {
+        $dataFallout = Fallout::select('order_id','sto','tanggal_fallout','pic','status','ket')
+        ->when(
+            $request->date_start && $request->date_end,
+            function (Builder $builder) use ($request) {
+                $builder->whereBetween(
+                    DB::raw('DATE(tanggal_fallout)'),
+                [
+                    $request->date_start,
+                    $request->date_end,
+                ]
+            );
+        }
+    )->paginate(10);
+
+        // Variabel berdasarkan status
+        $falloutPi = Fallout::Where('status','PI (Provision Issues)');
+        $falloutPs = Fallout::Where('status','PS (Completed)');
+        $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
+        $falloutCapul = Fallout::Where('status','Capul / Revoke');
+
+
+
+        return view('dashboardkpi2',[
+            'request'=> $request,
+            'dataFallout' => $dataFallout,
+            'chart'=>$chart->build(),
+            'falloutPi' => $falloutPi,
+            'falloutPs' => $falloutPs,
+            'falloutEskalasi' => $falloutEskalasi,
+            'fallout' => $falloutCapul,
+        ]);
+    }
+
     
     function detailkecepatankaryawan(DetailKecepatanKaryawanChart $chart){
         

@@ -17,38 +17,33 @@
                 <div class="profile-picture">
                     <div class="circle"></div>
                 </div>
-                <div class="fields">
-                    <label for="order_id">Order ID: </label>
-                    <input type="text" id="order_id" name="order_id" required>
-                </div>
 
                 <div class="fields">
-                    <label for="status_message">Status Message: </label>
-                    <input type="text" id="status_message" name="status_message" required>
-                </div>
-
-                <div class="fields">
-                    <label for="sto">STO: </label>
-                    <input type="text" id="sto" name="sto" required>
-                </div>
-
-                <div class="fields">
-                    <label for="status">Status: </label>
-                    <select id="status" name="status">
-                        <option value="PS (Completed)">PS (Completed)</option>
-                        <option value="Eskalasi">Eskalasi</option>
-                        <option value="PI (Provision Issues)">PI (Provision Issues)</option>
-                        <option value="Capul/Revoke">Capul/Revoke</option>
+                    <label for="role">Role: </label>
+                    <select id="role" name="role">
+                        <option value="Division Leader">Division Leader</option>
+                        <option value="Unit Leader">Unit Leader</option>
+                        <option value="Employee">Employee</option>
                     </select>
                 </div>
 
-                <div class="fields" id="ket_input" style="display: none;">
-                    <label for="ket">Keterangan : </label>
-                    <input type="text" id="ket" name="ket">
+                <div class="fields">
+                    <label for="name">Nama: </label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="fields">
+                    <label for="id_employee">Employee ID: </label>
+                    <input type="text" id="id_employee" name="id_employee" required>
+                </div>
+
+                <div class="fields">
+                    <label for="password">Password: </label>
+                    <input type="text" id="password" name="password" required>
                 </div>
 
                 <div class="fields-button">
-                    <button type="submit">Submit</button>
+                    <button type="submit">Perbarui User</button>
                 </div>
             </div>
         </form>

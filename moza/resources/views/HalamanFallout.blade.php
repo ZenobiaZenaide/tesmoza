@@ -2,6 +2,36 @@
 <div class="container">
     <x-sidebar />
         <main>
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <div class="profile-picture">
+                        <div class="circle">
+                            
+                        </div>
+                   </div>
+                   <p> Welcome, Benny! </p>
+                </div>
+                <div class="header-content">
+                    <div class="periode">
+                        <div class="date">
+                            <label for="date-start">Mulai : </label>
+                            <input type="date" id="date-start" name="date-start">
+                        </div>
+                        <div class="date">
+                            <label for="date-end">Berakhir : </label>
+                            <input type="date" id="date-end" name="date-end">
+                        </div>
+                    </div>
+                    <div class="spacing">
+                       
+                    </div>
+                    <div class="dashboard-switch">
+                    </div>
+                </div>
+                <div class="line-break">
+                    
+                </div>
+            </div>
             <div class="insights">
                 <div class="sales"  onclick="toggleFilter('PS (Complete)')">
                     <div class="middle">

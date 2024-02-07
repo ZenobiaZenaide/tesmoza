@@ -1,10 +1,13 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DivisionLeaderController;
 use App\Http\Controllers\UnitLeaderController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 // Charts
 use App\Http\Charts\FalloutStatusChart;
@@ -46,6 +49,8 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/daftaruser', [DivisionLeaderController::class, 'daftaruser'])->name("daftaruser");
         Route::get('/edituser', [DivisionLeaderController::class, 'edituser'])->name("edituser");
         Route::get('/editfallout', [DivisionLeaderController::class, 'editfallout'])->name("editfallout");
+        Route::get('/filtertanggal', [DivisionLeaderController::class, 'filtertanggal'])->name("filtertanggal");
+        Route::get('/dashboardkpi2_filtertanggal', [DivisionLeaderController::class, 'dashboardkpi2_filtertanggal'])->name("dashboardkpi2_filtertanggal");
     });
 
     // Unit Leader Access

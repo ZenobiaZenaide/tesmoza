@@ -167,7 +167,7 @@ b {
 aside {
     position: fixed;
     height: 100vh;
-    background:  var(--color-background);
+    background:  var(--color-white);
     box-shadow: var(--box-shadow);
     width: 20vh;
 }
@@ -178,7 +178,7 @@ aside h3 {
 
 /* Design system aside top  (logo, x) */
 aside .top {
-    background : var(--color-background);
+    background : var(--color-white);
     display : flex;
     align-items: center;
     justify-content: space-between;
@@ -208,7 +208,7 @@ aside .close{
 /* Design system aside sidebar content */
 
 aside .sidebar {
-    background:  var(--color-background);
+    background:  var(--color-white);
     display: flex;
     flex-direction: column;
     padding-top: 0.8rem;
@@ -370,45 +370,125 @@ main .dashboard-body {
 
 /* Styling header dashboard */
 main .dashboard-header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    height: auto;
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+    padding : 1rem 1.8rem 0 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* Styling line break (pemisah) */
+main .line-break {
+    content: "";
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-3);
+}
+
+/* Styling profile header dashboard */
+main .dashboard-header .dashboard-title .profile-picture .circle {
+    content: "";
+    height: 3rem;
+    width: 3rem;
+    border-radius : 100%;
+    background-color: var(--color-dark-variant);
+}
+main .dashboard-header .dashboard-title .profile-picture {
+    display: flex;
+    height: auto;
+    width: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Styling component header dashboard */
+main .dashboard-header .header-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background-color: var(--color-primary);
-    height: 4rem;
+    align-items: center;
+    background-color: var(--color-white);
+    border-radius: var(--card-padding);
     border-radius: var(--border-radius-2);
-    box-shadow: var(--box-shadow);
-    color: var(--color-white);
-    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
-main .dashboard-header .dashboard-title {
+/* date Filter Submit */
+main .dashboard-header .header-content .spacing {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    color: var(--color-white);
 }
 
+main .dashboard-header .header-content .spacing .filter-date{   
+    background-color: var(--color-primary);
+    width: auto;
+    height: auto;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-1);
+    color: var(--color-white);
+    border: 1px solid var(--color-primary);
+}
+
+/* Styling judul */
+main .dashboard-header .dashboard-title{
+    display: flex;
+    font-size: 2rem;
+    align-items: center;
+}
+
+main .dashboard-header .dashboard-title p {
+
+}
+
+/* Styling Periode */
+main .dashboard-header .periode {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-2);
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 1.8rem;
+    justify-content: center;
+    width: auto;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+main .dashboard-header .dasboard-switch {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-2);
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Switch Styling */
 main .dashboard-header .dashboard-switch {
     display: flex;
     justify-content: flex-end;
-    height: 100%;
+    padding-right: 1.8rem;
 }
 
-main .dashboard-header .dashboard-btn-switch{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: var(--color-white);
-}
-
-main .dashboard-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background-color: var(--color-primary);
-    height: 4rem;
+main .dashboard-header .switch {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-danger);
     border-radius: var(--border-radius-2);
-    box-shadow: var(--box-shadow);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    color: var(--color-primary);
 }
-
 
 main .dashboard-body-right {
     margin-top: 2rem;
@@ -465,6 +545,7 @@ main .fallout-table table {
     text-align: center;
     /* box-shadow: var(--box-shadow); */
     transition: all 300ms ease; 
+    table-layout: fixed;
 }
 
 .fallout-table th {
@@ -477,6 +558,7 @@ main table tbody td {
     height: 5rem;
     border-bottom: 1px solid var(--color-light);
     color: var(--color-dark-variant);
+    width: auto;
 }
 
 main table tbody tr:last-child td {
@@ -509,6 +591,23 @@ main .formadduser-card {
     padding: 1rem 0 2rem 0;
 }
 
+/* profilepicture add-user */
+.formadduser-card .profile-picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.formadduser-card .profile-picture .circle {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 100%;
+    content: "";
+    background-color: var(--color-dark-variant);
+    transition: all 300ms ease;
+}
+
 .formadduser-card  .form-fields {
     display: grid;
     gap: 4rem;
@@ -525,6 +624,14 @@ main .formadduser-card {
 }
 
 .formadduser-card .form-fields .fields input[type='text'] {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius-3);
+    padding: var(--card-padding);
+    height: 2rem;
+    width: 100%;
+}
+
+.formadduser-card .form-fields .fields input[type='password'] {
     background-color: var(--color-background);
     border-radius: var(--border-radius-3);
     padding: var(--card-padding);
@@ -779,6 +886,12 @@ main .form-fields .profile-picture .circle{
     justify-content: center;
     align-items: center;
 }
+
+/* edit icon aksi */
+.aksi a{
+    margin: 0 0.5rem;
+}
+
 
 
 

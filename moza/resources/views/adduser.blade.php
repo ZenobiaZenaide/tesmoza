@@ -8,10 +8,15 @@
                 </a>
                 <p>Kembali</p>
             </div>
+
             <form action="{{ route('create.account') }}" method="POST" class="formadduser-card">
                 @csrf
                 <div class="title">
                     <h3>Tambah Akun DAMAN</h3>
+                </div>
+
+                <div class="profile-picture">
+                    <div class="circle"></div>
                 </div>
 
                 <div class="form-fields">
