@@ -9,7 +9,7 @@
                             
                         </div>
                    </div>
-                   <p> Welcome, Benny! </p>
+                   <p> Welcome, Benny!</p>
                 </div>
                 <div class="header-content">
                     <div class="periode">
@@ -85,7 +85,7 @@
                     <small class="text-muted">Fallout</small>
                 </div>
             </div>
-            
+    
             <div class="fallout-table">
                 <div class="table-additions">
                     <form class="search-bar" action="{{ route('caridatafallout')}}" method="GET">

@@ -9,8 +9,6 @@ class EmployeeController extends Controller
 {
     function employee()
     {
-        echo "Halo, Selamat Datang Mr Employee";
-        echo "<h1>" . Auth::user()->name . "</h1>";
-        echo "<a href='/logout'>Logout >></a>";
+     return view('dashboardfallout_employee');
     }
 }

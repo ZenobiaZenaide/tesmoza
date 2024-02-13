@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\View;
 
 class LoginController extends Controller
 {
@@ -28,11 +29,13 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($infologin)){
-            if (Auth::user()->role == 'divisionleader') {
+            if (Auth::user()->role == 'Admin') {
                 return redirect('dashboardkpi');
-            } elseif (Auth::user()->role == 'unitleader') {
-                return redirect('unitleader');
-            } elseif (Auth::user()->role == 'employee') {
+            } elseif (Auth::user()->role == 'Division Leader') {
+                return redirect('dashboardkpi');
+            } elseif (Auth::user()->role == 'Unit Leader') {
+                return redirect('unitleader.dashboardfallout_unitleader');
+            } elseif (Auth::user()->role == 'Employee') {
                 return redirect('employee');
             }
         }else{

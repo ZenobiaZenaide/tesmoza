@@ -1,10 +1,9 @@
-
 <div class="container">
     <x-sidebar />
     <main>
         <div class="back">
             <a href="{{ route('dashboardkpi2')}}">
-            <span class="material-icons-sharp">arrow_back_ios</span>
+                <span class="material-icons-sharp">arrow_back_ios</span>
             </a>
             <p>Kembali</p>
         </div>
@@ -15,7 +14,7 @@
                     <div class="circle"></div>
                 </div>
                 <div class="namakaryawan">
-                   <h1>Benny</h1>
+                   <h1>{{ $employee->name }}</h1>
                 </div>
                 <div class="detail-biodata">
                     <div class="biodata-1">
@@ -26,7 +25,7 @@
                             <div class="titik-dua">
                                 :
                             </div>
-                            <p>Benny Mister Benny</p>
+                            <p>{{ $employee->name }}</p>
                         </div>
                     </div>
                     <div class="biodata-1">
@@ -37,7 +36,7 @@
                             <div class="titik-dua">
                                 :
                             </div>
-                            <p>Unit Leader</p>
+                            <p>{{ $employee->role }}</p>
                         </div>
                     </div>
                     <div class="biodata-1">
@@ -48,7 +47,7 @@
                             <div class="titik-dua">
                                 :
                             </div>
-                            <p>123456</p>
+                            <p>{{ $employee->id_employee }}</p>
                         </div>
                     </div>
                     <div class="biodata-1">
@@ -59,7 +58,7 @@
                             <div class="titik-dua">
                                 :
                             </div>
-                            <p>100 Fallout</p>
+                            <p>{{ $totalSubmisi }} Fallout</p>
                         </div>
                     </div>
                 </div>
@@ -88,14 +87,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($dataFallout as $data)
+                @foreach ($dataFallout as $fallout)
                     <tr>
-                        <td>{{ $data['order_id'] }}</td>
-                        <td>{{ $data['sto'] }}</td>
-                        <td>{{ $data['tanggal_fallout'] }}</td>
-                        <td>{{ $data['pic'] }}</td>
-                        <td>{{ $data['status'] }}</td>
-                        <td>{{ $data['ket'] }}</td>
+                        <td>{{ $fallout->order_id }}</td>
+                        <td>{{ $fallout->sto }}</td>
+                        <td>{{ $fallout->tanggal_fallout }}</td>
+                        <td>{{ $fallout->pic }}</td>
+                        <td>{{ $fallout->status }}</td>
+                        <td>{{ $fallout->ket }}</td>
                     </tr>
                 @endforeach
                 </tbody>

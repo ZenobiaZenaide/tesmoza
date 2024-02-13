@@ -13,10 +13,10 @@
 
 
     {{-- Link Scripts --}}
-   
+    
 
 
-    <title>Sidebar</title>
+    <title>MOZA</title>
 </head>
 <body>
 @yield('content') 

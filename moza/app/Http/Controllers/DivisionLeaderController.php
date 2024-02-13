@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+
+//Models
 use App\Models\User;
 use App\Models\Fallout;
+
+//Charts
 use App\Charts\FalloutStatusChart;
 use App\Charts\KecepatanKaryawanChart;
 use App\Charts\DetailKecepatanKaryawanChart;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
 
 
 class DivisionLeaderController extends Controller
@@ -176,28 +180,38 @@ class DivisionLeaderController extends Controller
         ]);
     }
 
-    function dashboardkpi2(KecepatanKaryawanChart $chart){ 
+    public function showKpiDashboard(KecepatanKaryawanChart $chart)
+    {
+        // Inisialisasi chart
+        $chart = $chart->build();
+
+        $dataemployee = User::all(); // Ambil semua data karyawan
+
+        // Hitung total submisi fallout dan kecepatan rata-rata
+        foreach ($dataemployee as $employee) {
+            $totalSubmisi = Fallout::where('pic', $employee->name)->count();
+            $fallouts = Fallout::where('pic', $employee->name)->get();
+            $totalDuration = 0;
+
+            foreach ($fallouts as $fallout) {
+                $start = strtotime($fallout->created_at);
+                $end = strtotime($fallout->end_at);
+                $totalDuration += ($end - $start); // Hitung durasi dalam detik
+            }
+
+            // Hitung rata-rata kecepatan dalam detik
+            $averageDuration = ($totalSubmisi > 0) ? ($totalDuration / $totalSubmisi) : 0;
+
+            // Tambahkan informasi ke array data karyawan
+            $employee->totalSubmisi = $totalSubmisi;
+            $employee->averageDuration = $averageDuration;
+        }
         
-        // Kepentingan Pagination data
-        $pagination = 10;
-        $dataFallout = Fallout::paginate($pagination);
-
-        // Variabel berdasarkan status
-        $falloutPi = Fallout::Where('status','PI (Provision Issues)');
-        $falloutPs = Fallout::Where('status','PS (Completed)');
-        $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
-        $falloutCapul = Fallout::Where('status','Capul / Revoke');
-
-        return view('dashboardkpi2',[
-            'chart'=>$chart->build(),
-            'dataFallout' => $dataFallout,
-            'falloutPi' => $falloutPi,
-            'falloutPs' => $falloutPs,
-            'falloutEskalasi' => $falloutEskalasi,
-            'fallout' => $falloutCapul,
+        return view('dashboardkpi2', [
+            'dataemployee' => $dataemployee,
+            'chart' => $chart
         ]);
     }
-
 
 
     function dashboardkpi2_filtertanggal(KecepatanKaryawanChart $chart, Request $request)
@@ -215,6 +229,8 @@ class DivisionLeaderController extends Controller
             );
         }
     )->paginate(10);
+
+        
 
         // Variabel berdasarkan status
         $falloutPi = Fallout::Where('status','PI (Provision Issues)');
@@ -235,35 +251,26 @@ class DivisionLeaderController extends Controller
         ]);
     }
 
-    
-    function detailkecepatankaryawan(DetailKecepatanKaryawanChart $chart){
+    function detailkecepatankaryawan(DetailKecepatanKaryawanChart $chart, $id_employee){
         
-        $pagination = 10;
-        $dataFallout = Fallout::paginate($pagination);
-
-        // Variabel berdasarkan status
-        $falloutPi = Fallout::Where('status','PI (Provision Issues)');
-        $falloutPs = Fallout::Where('status','PS (Completed)');
-        $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
-        $falloutCapul = Fallout::Where('status','Capul / Revoke');
+        $employee = User::where('id_employee', $id_employee)->firstOrFail();
+        $totalSubmisi = Fallout::where('pic', $employee->name)->count();
+        $dataFallout = Fallout::where('pic', $employee->name)->paginate(10);
 
         return view('detailkecepatankaryawan',[
-            'chart'=>$chart->build(),
-            'dataFallout' => $dataFallout,
-            'falloutPi' => $falloutPi,
-            'falloutPs' => $falloutPs,
-            'falloutEskalasi' => $falloutEskalasi,
-            'fallout' => $falloutCapul,
+            'chart' => $chart->build(), // Build chart sebelum dikirim ke view
+            'employee' => $employee,
+            'totalSubmisi' => $totalSubmisi,
+            'dataFallout' => $dataFallout
         ]);
     }
-
-        
+      
     public function caridatafallout(Request $request) {
 
         $dataFallout = Fallout::select('order_id','sto','tanggal_fallout','pic','status','ket');
 
         if ($request->get('search')) {
-            $dataFallout =  $dataFallout->Where('order_id','LIKE', '%' .$request->get('search').'%')
+            $dataFallout = $dataFallout->Where('order_id','LIKE', '%' .$request->get('search').'%')
                                         ->orWhere('pic', 'LIKE', '%' .$request->get('search').'%')
                                         ->orWhere('sto', 'LIKE', '%' .$request->get('search').'%')
                                         ->orWhere('status', 'LIKE', '%' .$request->get('search').'%')
@@ -300,4 +307,6 @@ class DivisionLeaderController extends Controller
     public function editfallout() {
         return view('editfallout');
     }
+
+
 }

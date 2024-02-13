@@ -60,14 +60,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($dataFallout as $data)
+                @foreach ($dataemployee as $data)
                     <tr>
-                        <td>{{ $data['order_id'] }}</td>
-                        <td>{{ $data['sto'] }}</td>
-                        <td>{{ $data['tanggal_fallout'] }}</td>
-                        <td>{{ $data['pic'] }}</td>
+                        <td>{{ $data->id_employee }}</td>
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->totalSubmisi }}</td>
+                        <td>{{ $data->averageDuration }} seconds</td>
                         <td>
-                            <a href="{{route('detailkecepatankaryawan')}}">
+                            <a href="{{ route('detailkecepatankaryawan', ['id_employee' => $data->id_employee]) }}">
                             <span class="material-icons-outlined"> visibility </span>
                             </a>
                         </td>
@@ -76,7 +76,7 @@
                 </tbody>
             </table>
             <br />
-            {{ $dataFallout->links() }}
+            {{-- {{ $dataFallout->links() }} --}}
         </div>
     </main>
 </div>

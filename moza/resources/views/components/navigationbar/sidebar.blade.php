@@ -14,6 +14,10 @@
 
         {{-- Konten Sidebar --}}
         <div class="sidebar">
+
+
+            {{-- Sidebar Khusus Division Leader --}}
+            @if(Auth::user()->role == 'Division Leader')
             <a href="{{ route('dashboardkpi')}}" class="active">
                 <span class="material-icons-sharp">dashboard</span>    
                 <h3>Dashboard</h3>
@@ -27,6 +31,21 @@
                 <span class="material-icons-sharp">person</span>
                 <h3>Manage User</h3>
             </a>
+            @endif
+
+
+            {{-- Sidebar Khusus UnitLeader --}}
+            @if(Auth::user()->role == 'unitleader')
+            <a href="{{ route('dashboardfallout_unitleader')}}" class="active">
+                <span class="material-icons-sharp">dashboard</span>    
+                <h3>Dashboard</h3>
+            <a href="{{ route('halamanfallout_unitleader')}}">
+                 <span class="material-icons-sharp">description</span>
+                <h3>Data Fallout</h3>
+            </a>
+
+            </a>
+            @endif
             <a href="logout">
                 <span class="material-icons-sharp">logout</span>
                 <h3>Logout</h3>
@@ -34,5 +53,4 @@
         </div>
     </aside>
 </div>
-    
-@endsection
+

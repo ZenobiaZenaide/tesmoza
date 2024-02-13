@@ -311,8 +311,7 @@ main .insights {
 main .insights > div {
     background: var(--color-white);
     padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
-    margin-top: 1rem;
+    border-radius: var(--border-radius-2);
     box-shadow:  var(--box-shadow);
     transition: all 300ms ease;
 
@@ -374,7 +373,7 @@ main .dashboard-header {
     flex-direction: column;
     background-color: var(--color-white);
     height: auto;
-    border-radius: var(--border-radius-3);
+    border-radius: var(--border-radius-2);
     box-shadow: var(--box-shadow);
     padding : 1rem 1.8rem 0 1.8rem;
     margin-bottom: 2rem;
@@ -386,7 +385,7 @@ main .line-break {
     width: 100%;
     height: 4px;
     background-color: var(--color-primary);
-    border-radius: var(--border-radius-3);
+    border-radius: var(--border-radius-2);
 }
 
 /* Styling profile header dashboard */
@@ -430,9 +429,11 @@ main .dashboard-header .header-content .spacing .filter-date{
     height: auto;
     margin-top: 1rem;
     padding: 0.5rem;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-2);
     color: var(--color-white);
     border: 1px solid var(--color-primary);
+    display: flex;
+    align-items: center;
 }
 
 /* Styling judul */
@@ -481,7 +482,7 @@ main .dashboard-header .dashboard-switch {
 main .dashboard-header .switch {
     background-color: var(--color-background);
     border: 1px solid var(--color-danger);
-    border-radius: var(--border-radius-2);
+    border-radius: var(--border-radius-1);
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -499,8 +500,8 @@ main .dashboard-body-right {
 main .dashboard-body .totalsubmitted-card {
     background: var(--color-white);
     padding: var(--card-padding);
-    border: 1px solid var(--color-on-success);
-    border-radius: var(--card-border-radius);
+    border: 2px solid var(--color-on-success);
+    border-radius: var(--border-radius-2);
     box-shadow:  var(--box-shadow);
     height: 100%;
     width: auto;
@@ -540,7 +541,7 @@ main .fallout-table h2 {
 main .fallout-table table {
     background: var(--color-white);
     width:100%;
-    border-radius: var(--card-border-radius);
+    border-radius: var(--border-radius-1);
     padding: var(--card-padding);
     text-align: center;
     /* box-shadow: var(--box-shadow); */
@@ -563,7 +564,6 @@ main table tbody td {
 
 main table tbody tr:last-child td {
     border: none;
-    margin-bottom: 2rem;
 }
 
 main .falloutStatus-Chart {
@@ -571,7 +571,7 @@ main .falloutStatus-Chart {
     margin-top: 2rem;
     background: var(--color-white);
     padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
+    border-radius: var(--border-radius-2);
     box-shadow:  var(--box-shadow);
 }
 
@@ -579,7 +579,7 @@ main .falloutStatus-Chart {
 main .formadduser-card {
     background: var(--color-white);
     padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
+    border-radius: var(--border-radius-1);
     margin-top: 1rem;
     box-shadow:  var(--box-shadow);
     height: auto;
@@ -740,7 +740,7 @@ main .fallout-table {
     background: var(--color-white);
     padding: var(--card-padding);
     padding-left: 1rem;
-    border-radius: var(--card-border-radius);
+    border-radius: var(--border-radius-2);
     box-shadow:  var(--box-shadow);
     width: 100%;
 }
@@ -890,6 +890,170 @@ main .form-fields .profile-picture .circle{
 /* edit icon aksi */
 .aksi a{
     margin: 0 0.5rem;
+}
+
+/* KHUSUS UNIT LEADER */
+
+/*Halaman Fallout */
+
+main .body-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+main .body-container .body-container-left {
+    background-color: var(--color-white);
+    padding : var(--card-padding);
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+}
+
+main .body-container .body-container-right {
+    background-color: var(--color-white);
+    padding : var(--card-padding);
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+}
+
+main .table-additions2 {
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--border-radius-2);
+    box-shadow: var(--box-shadow);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+main .table-additions2 .title-left{
+    display: flex;
+    align-items: center;
+}
+
+main .table-additions2 .additions-right{
+    display: flex;
+    justify-content: flex-end;
+}
+main .table-additions2 .additions-right .search .search-bar{
+    color: var(--color-dark-variant);
+    background-color: transparent;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    border-radius: var(--border-radius-2);
+    border: 1px solid var(--color-light);
+    height: 3rem;
+}
+
+#search {
+    background-color: transparent;
+    height: 3rem;
+}
+
+main .table-additions2 .additions-right .add-items {
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-info-light);
+    margin-left: 1rem;
+    border-radius: var(--border-radius-1);
+}
+
+.searching2 {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-info-light);
+    border-radius: var(--border-radius-2);
+    padding: 0 1rem;
+}
+
+.search-bar2 {
+    display: flex;
+    align-items: center;
+}
+
+.title-table {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto;
+    text-align: left;
+}
+
+/* Ubah warna icon material designs */
+/* Rumusan: ubahwarna-jenisicon-namahalaman */
+
+
+.ubahwarna-add-halamanfallout_unitleader {
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    padding: 0.5rem;
+    border-radius: var(--border-radius-2);
+}
+
+.ubahwarna-delete-halamanfallout_unitleader {
+    color: var(--color-primary);
+}
+
+.ubahwarna-edit-halamanfallout_unitleader {
+    color: #6895D2;
+}
+
+.ubahwarna-title-table-halamanfallout_unitleader {
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.ubahwarna-span-title-table-halamanfallout_leader {
+    color: var(--color-dark-variant);
+    margin-left: 0.5rem;
+    font-weight: normal;
+}
+
+.ubahwarna-h2-fallout-table-dashboard_fallout_unitleader {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    
+}
+
+.ubahwarna-h3-left-dashboardfallout_unitleader {
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+.ubahwarna-p-content-left-dashboardfallout_unitleader {
+    color: var(--color-on-success);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.ubahwarna-h2-content-left-dashboardfallout_unitleader {
+    font-size: 1.5rem;
+}
+
+
+
+/* Pengaturan padding margin manual */
+/* Rumusan: marginmanual-titletable-halamanfallout_unitleader */
+
+.marginmanual-titletable-halamanfallout_unitleader {
+    margin-bottom: 2rem;
+}
+
+.marginmanual-filter-date-dashboardfallout_unitleader {
+    margin-left: 1rem;
+}
+
+.marginmanual-restart_alt-dashboardfallout_unitleader {
+    margin-left: 0.5rem;
 }
 
 
