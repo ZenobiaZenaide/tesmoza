@@ -31,7 +31,7 @@ class FalloutStatusChart_unitleader
             'Eskalasi',
             'PI (Provision Issues)',
             'PS (Completed)',
-            'Capul / Revoke'
+            'Capul / Revoke',
         ];
 
         return $this->chart->donutChart()

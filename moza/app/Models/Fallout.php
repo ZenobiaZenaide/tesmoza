@@ -24,6 +24,7 @@ class Fallout extends Model
         'pic',
         'status',
         'ket',
+        'ticket',
         'created_at',
         'end_at',
         'updated_at'

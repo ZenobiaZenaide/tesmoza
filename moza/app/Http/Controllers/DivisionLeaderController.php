@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use App\Exports\FalloutExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 //Models
 use App\Models\User;
@@ -89,75 +91,21 @@ class DivisionLeaderController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'id_employee' => 'required|string|max:255',
-            'role' => 'required|string|in:Division Leader,Unit Leader,Employee',
+            'role' => 'required|string|in:Admin,Division Leader,Unit Leader,Employee',
             'password' => 'required|string|min:6',
         ]);
-    
-        // Mapping nilai peran dari UI ke nilai yang akan disimpan di database
-        $roleMap = [
-            'Division Leader' => 'divisionleader',
-            'Unit Leader' => 'unitleader',
-            'Employee' => 'employee',
-        ];
-    
-        // Memperoleh nilai peran yang sesuai dari peta
-        $role = $roleMap[$request->input('role')];
     
         // Buat akun baru
         $user = User::create([
             'name' => $request->input('name'),
             'id_employee' => $request->input('id_employee'),
-            'role' => $role,
+            'role'=>$request->input('role'),
             'password' => bcrypt($request->input('password')), // Menggunakan bcrypt untuk menyimpan password secara aman
         ]);
     
         // Jika berhasil, redirect ke halaman tertentu
-        return redirect()->route('adduser')->with('success', 'Account created successfully.');
+        return redirect()->route('daftaruser')->with('success', 'Account created successfully.');
     }    
-
-    function addfallout()
-    {
-        $created_at = now()->format('H:i:s');
-        session()->put('created_at', $created_at);
-
-        return view('addfallout');
-    }
-
-    public function store(Request $request)
-    {
-        // Validasi input
-        $validatedData = $request->validate([
-            'order_id' => 'required|string',
-            'status_message' => 'required|string',
-            'sto' => 'required|string',
-            'status' => 'required|string|in:PS (Completed),PI (Provision Issues),Capul/Revoke,Eskalasi',
-            'ket' => $request->status === 'Eskalasi' ? 'required|string' : '',
-        ]);
-
-        // Simpan data fallout ke dalam database
-        $fallout = new Fallout();
-        $fallout->order_id = $validatedData['order_id'];
-        $fallout->status_message = $validatedData['status_message'];
-        $fallout->sto = $validatedData['sto'];
-        $fallout->status = $validatedData['status'];
-        $fallout->ket = $validatedData['ket'] ?? null; // Keterangan hanya jika status Eskalasi
-        $fallout->tanggal_fallout = now()->toDateString(); // Tanggal saat ini
-        $fallout->pic = auth()->user()->name; // User yang mengisi data
-        // Memperoleh waktu created_at dari session
-        $created_at = session()->get('created_at');
-        $fallout->created_at = $created_at;
-
-        $fallout->save();
-
-        // Update end_at pada waktu saat ini
-        $fallout->update(['end_at' => now()->format('H:i:s')]);
-
-        // Redirect atau response sesuai kebutuhan
-        return redirect()->route('halamanFallout')->with('success', 'Data Fallout berhasil disimpan!');
-    }
-
-
-
 
     function halamanFallout(){
 
@@ -281,32 +229,160 @@ class DivisionLeaderController extends Controller
         return view('/halamanFallout',compact('dataFallout'));
     }
 
-    public function daftaruser() {
-        $pagination = 10;
-        $dataFallout = Fallout::paginate($pagination);
+    public function daftaruser_Admin() {
 
-        // Variabel berdasarkan status
-        $falloutPi = Fallout::Where('status','PI (Provision Issues)');
-        $falloutPs = Fallout::Where('status','PS (Completed)');
-        $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
-        $falloutCapul = Fallout::Where('status','Capul / Revoke');
+        $dataUser = User::all();
 
-        return view('daftaruser',[
-            'dataFallout' => $dataFallout,
-            'falloutPi' => $falloutPi,
-            'falloutPs' => $falloutPs,
-            'falloutEskalasi' => $falloutEskalasi,
-            'fallout' => $falloutCapul,
+        return view('daftaruser',['dataUser' => $dataUser]);
+    }
+
+    public function edituser_Admin($id_employee) {
+
+        $updateUser = User::where('id_employee', $id_employee)->firstOrFail();
+        return view('edituser', compact('updateUser'));
+    }
+
+    public function updateuser_edituser_Admin(Request $request, $id_employee) {
+        // Validasi input
+        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'id_employee' => 'required|string|max:255|unique:users,id_employee,'.$id_employee,
+            'role' => 'required|string|in:Division Leader,Unit Leader,Employee',
+            'password' => 'nullable|string|min:6',
         ]);
+    
+        // Temukan user berdasarkan id_employee
+        $updateUser = User::where('id_employee', $id_employee)->firstOrFail();
+
+        dd($request->password); // atau var_dump($request->password);
+
+        // Update informasi user
+        $updateUser->id_employee = $request->id_employee;
+        $updateUser->name = $request->name;
+        $updateUser->role = $request->role;
+        
+        // Update password jika ada input baru
+        if($request->password) {
+            // Enkripsi password baru
+            $updateUser->password = bcrypt($request->password);
+        }
+    
+        // Simpan perubahan
+        $updateUser->save();
+
+        return $updateUser;
+        // Redirect kembali ke halaman daftar user
+        return redirect()->route('daftaruser')->with('success', 'User berhasil diperbarui.');
     }
 
-    public function edituser() {
-        return view('edituser');
+    public function deleteuser_daftaruser_Admin($id_employee) {
+
+        // Menemukan data Fallout berdasarkan order_id
+        $deleteUser = User::where('id_employee', $id_employee)->firstOrFail();
+
+        //Hapus data Fallout dari database
+        $deleteUser->delete();
+
+        // Redirect kembali ke halaman Fallout
+        return redirect()->route('daftaruser')->with('success', 'Account User Berhasil di Hapus');
     }
 
-    public function editfallout() {
-        return view('editfallout');
+    function addfallout()
+    {
+        $created_at = now()->format('H:i:s');
+        session()->put('created_at', $created_at);
+
+        return view('addfallout');
     }
 
+    public function store_addfallout_unitleader(Request $request)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'order_id' => 'required|string',
+            'status_message' => 'required|string',
+            'sto' => 'required|string',
+            'status' => 'required|string|in:PS (Completed),PI (Provision Issues),Capul/Revoke,Eskalasi',
+            'ket' => $request->status === 'Eskalasi' ? 'required|string' : '',
+        ]);
+
+        // Simpan data fallout ke dalam database
+        $fallout = new Fallout();
+        $fallout->order_id = $validatedData['order_id'];
+        $fallout->status_message = $validatedData['status_message'];
+        $fallout->sto = $validatedData['sto'];
+        $fallout->status = $validatedData['status'];
+        $fallout->ket = $validatedData['ket'] ?? null; // Keterangan hanya jika status Eskalasi
+        $fallout->tanggal_fallout = now()->toDateString(); // Tanggal saat ini
+        $fallout->pic = auth()->user()->name; // User yang mengisi data
+        // Memperoleh waktu created_at dari session
+        $created_at = session()->get('created_at');
+        $fallout->created_at = $created_at;
+
+        $fallout->save();
+
+        // Update end_at pada waktu saat ini
+        $fallout->update(['end_at' => now()->format('H:i:s')]);
+
+        // Redirect atau response sesuai kebutuhan
+        return redirect()->route('halamanFallout')->with('success', 'Data Fallout berhasil disimpan!');
+    }
+
+    public function editfallout_HalamanFallout($order_id) {
+        $updateFallout = Fallout::where('order_id', $order_id)->firstOrFail();
+        return view('editfallout', compact('updateFallout'));
+    }
+
+    public function updatefallout_HalamanFallout(Request $request, $order_id)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'order_id' => 'required|string',
+            'status_message' => 'required|string',
+            'sto' => 'required|string',
+            'status' => 'required|string|in:PS (Completed),PI (Provision Issues),Capul/Revoke,Eskalasi',
+            'ket' => 'required|string',
+            'ticket' => $request->status == 'Eskalasi' ? ['required', 'string'] : 'nullable|string'
+        ]);
+
+        $fallout = Fallout::find($order_id); // Sesuaikan dengan cara Anda mendapatkan data Fallout yang ingin diupdate
+        $fallout->order_id = $validatedData['order_id'];
+        $fallout->status_message = $validatedData['status_message'];
+        $fallout->sto = $validatedData['sto'];
+        $fallout->status = $validatedData['status'];
+        $fallout->ket = $validatedData['ket'];
+        $fallout->ticket = $validatedData['ticket'] ?? ''; // Pastikan ticket diisi hanya jika ada
+        $fallout->updated_at = now(); // Set updated_at menjadi waktu saat ini
+
+        // Mengambil nilai end_at yang saat ini ada dalam basis data
+        $end_at = $fallout->end_at;
+
+        $fallout->save();
+
+        // Menetapkan kembali nilai end_at setelah menyimpan perubahan
+        $fallout->end_at = $end_at;
+        $fallout->save();
+
+        // Redirect atau response sesuai kebutuhan
+        return redirect()->route('halamanFallout')->with('success', 'Data Fallout berhasil diperbarui!');
+    }
+
+    public function deletefallout($order_id) {
+
+        // Menemukan data Fallout berdasarkan order_id
+        $deleteFallout = Fallout::where('order_id', $order_id)->firstOrFail();
+
+        //Hapus data Fallout dari database
+        $deleteFallout->delete();
+
+        // Redirect kembali ke halaman Fallout
+        return redirect()->route('halamanFallout')->with('success', 'Data Fallout Berhasil di Hapus');
+    }
+
+    public function export_HalmanFallout_divisionleader() 
+    {
+        return Excel::download(new FalloutExport, 'DataFallout.xlsx');
+    }
 
 }

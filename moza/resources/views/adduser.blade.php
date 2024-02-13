@@ -34,6 +34,7 @@
                     <div class="fields">
                         <label for="role">Role </label>
                         <select id="role" name="role">
+                            <option value="Admin">Admin</option>
                             <option value="Division Leader">Division Leader</option>
                             <option value="Unit Leader">Unit Leader</option>
                             <option value="Employee">Employee</option>

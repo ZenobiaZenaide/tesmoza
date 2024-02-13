@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DivisionLeaderController;
 use App\Http\Controllers\UnitLeaderController;
 use App\Http\Controllers\EmployeeController;
@@ -38,7 +39,7 @@ Route::get('/home', function () {
 Route::middleware(['auth'])->group(function() {
 
     Route::group(['middleware' => ['userAccess:Admin']], function () {
-        
+        Route::get('/admin', [AdminController::class, 'admin']);
     });
 
     // Division Leader Access
@@ -47,13 +48,23 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/dashboardkpi', [DivisionLeaderController::class, 'dashboardkpi'])->name("dashboardkpi");
         Route::get('/adduser', [DivisionLeaderController::class, 'adduser'])->name("adduser");
         Route::post('/create-account', [DivisionLeaderController::class, 'createAccount'])->name('create.account');
+
+        // Halaman Fallout
         Route::get('/halamanFallout', [DivisionLeaderController::class, 'halamanFallout'])->name("halamanFallout");
         Route::get('/addfallout', [DivisionLeaderController::class, 'addfallout'])->name("addfallout");
-        Route::post('/addfallout', [DivisionLeaderController::class, 'store'])->name("store_data_fallout");
+        Route::post('/addfallout', [DivisionLeaderController::class, 'store_addfallout_unitleader'])->name("store_data_fallout");
+        Route::get('/fallout/{order_id}/edit', [DivisionLeaderController::class, 'editfallout_HalamanFallout'])->name("editfallout");
+        Route::post('/fallout/update/{order_id}', [DivisionLeaderController::class, 'updatefallout_HalamanFallout'])->name('update_fallout');
+        Route::get('/fallout/delete/{order_id}', [DivisionLeaderController::class, 'deletefallout'])->name('fallout.delete');
         Route::get('/caridatafallout', [DivisionLeaderController::class, 'caridatafallout'])->name("caridatafallout");
-        Route::get('/daftaruser', [DivisionLeaderController::class, 'daftaruser'])->name("daftaruser");
-        Route::get('/edituser', [DivisionLeaderController::class, 'edituser'])->name("edituser");
-        Route::get('/editfallout', [DivisionLeaderController::class, 'editfallout'])->name("editfallout");
+        Route::get('/export', [DivisionLeaderController::class, 'export_HalmanFallout_divisionleader'])->name('fallout.exportExcel');
+
+        // Halaman User
+        Route::get('/daftaruser', [DivisionLeaderController::class, 'daftaruser_Admin'])->name("daftaruser");
+        Route::get('/edituser/{id_employee}', [DivisionLeaderController::class, 'edituser_Admin'])->name('edituser');
+        Route::post('/{id_employee}/updateuser', [DivisionLeaderController::class, 'updateuser_edituser_Admin'])->name('updateuser');
+        Route::get('/user/delete/{id_employee}', [DivisionLeaderController::class, 'deleteuser_daftaruser_Admin'])->name('user.delete');
+        
         Route::get('/filtertanggal', [DivisionLeaderController::class, 'filtertanggal'])->name("filtertanggal");
         Route::get('/dashboardkpi2_filtertanggal', [DivisionLeaderController::class, 'dashboardkpi2_filtertanggal'])->name("dashboardkpi2_filtertanggal");
         Route::get('/halamanfallouteskalasi', [DivisionLeaderController::class, 'halamanfallouteskalasi'])->name("halamanfallouteskalasi");
@@ -72,7 +83,6 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/addfallout_unitleader', [UnitLeaderController::class, 'addfallout_unitleader'])->name("addfallout_unitleader");
         Route::get('/filtertanggal_halamanfallout_unitleader', [UnitLeaderController::class, 'filtertanggal_halamanfallout_unitleader'])->name("filtertanggal_halamanfallout_unitleader");
         Route::get('/caridatafallout_halamanfallout_unitleader', [UnitLeaderController::class, 'caridatafallout_halamanfallout_unitleader'])->name("caridatafallout_halamanfallout_unitleader");
-
     });
 
     // Employee Access

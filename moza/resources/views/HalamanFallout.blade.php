@@ -93,7 +93,7 @@
                             <span class="material-icons-sharp">search</span>
                     </form>
                     <div class="filter">
-                        <p> Export ke Excel</p>
+                        <a href="{{ route('fallout.exportExcel') }}">Export ke Excel</a>
                         <span class="material-icons-sharp">save_as</span>
                     </div>
                     <div class="add-items">
@@ -124,10 +124,10 @@
                             <td>{{ $data['status'] }}</td>
                             <td>{{ $data['ket'] }}</td>
                             <td>
-                                <a href="{{ route('editfallout') }}">
+                                <a href="{{ route('editfallout', ['order_id' => $data->order_id]) }}">
                                     <span class="material-icons-outlined">edit</span>
                                 </a>
-                                <a href="#">
+                                <a href="{{ route('fallout.delete', ['order_id' => $data->order_id]) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                     <span class="material-icons-outlined">delete</span>
                                 </a>
                             </td>

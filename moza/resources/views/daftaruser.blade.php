@@ -17,29 +17,25 @@
                 <table>
                     <thead>
                         <tr>
-                            <th> </th>
-                            <th>STO</th>
-                            <th>Tanggal Fallout</th>
-                            <th>PIC</th>
-                            <th>Status</th>
-                            <th>KET</th>
+                            <th></th>
+                            <th>ID Employee</th>
+                            <th>Name</th>
+                            <th>Role</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($dataFallout as $data)
+                    @foreach ($dataUser as $data)
                         <tr>
                             <td><div class="circle-1"> </div></td>
-                            <td>{{ $data['sto'] }}</td>
-                            <td>{{ $data['tanggal_fallout'] }}</td>
-                            <td>{{ $data['pic'] }}</td>
-                            <td>{{ $data['status'] }}</td>
-                            <td>{{ $data['ket'] }}</td>
+                            <td>{{ $data['id_employee'] }}</td>
+                            <td>{{ $data['name'] }}</td>
+                            <td>{{ $data['role'] }}</td>
                             <td class="aksi">
-                                <a href="{{ route('edituser') }}">
+                                <a href="{{ route('edituser', ['id_employee' => $data->id_employee]) }}">
                                     <span class="material-icons-outlined">edit</span>
                                 </a>
-                                <a href="#">
+                                <a href="{{ route('user.delete', ['id_employee' => $data->id_employee]) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
                                     <span class="material-icons-outlined">delete</span>
                                 </a>
                             </td>
@@ -48,7 +44,7 @@
                     </tbody>
                 </table>
                 <br />
-                {{ $dataFallout->links() }}
+                {{-- {{ $dataUser->links() }} --}}
             </div>
         <main>
     </div>

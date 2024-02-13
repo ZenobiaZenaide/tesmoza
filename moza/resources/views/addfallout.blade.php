@@ -41,7 +41,7 @@
 
                 <div class="fields" id="ket_input" style="display: none;">
                     <label for="ket">Keterangan : </label>
-                    <input type="text" id="ket" name="ket">
+                    <input value="ket" type="text" id="ket" name="ket">
                 </div>
 
                 <div class="fields-button">
@@ -53,10 +53,12 @@
 </div>
 
 <script>
-    document.getElementById('status').addEventListener('change', function () {
+    document.getElementById('status_message').addEventListener('input', function () {
         var ketInput = document.getElementById('ket_input');
-        if (this.value === 'Eskalasi') {
+        var statusMessage = this.value;
+        if (statusMessage.length > 36) {
             ketInput.style.display = 'block';
+            document.getElementById('ket').value = statusMessage.substr(36, 4);
         } else {
             ketInput.style.display = 'none';
         }
