@@ -63,19 +63,28 @@ class DivisionLeaderController extends Controller
 
     public function filtertanggal(FalloutStatusChart $falloutStatusChart, Request $request)
     {   
-        $dataFallout = Fallout::select('order_id','sto','tanggal_fallout','pic','status','ket')
-                        ->when(
-                            $request->date_start && $request->date_end,
-                            function (Builder $builder) use ($request) {
-                                $builder->whereBetween(
-                                    DB::raw('DATE(tanggal_fallout)'),
-                                    [
-                                        $request->date_start,
-                                        $request->date_end,
-                                    ]
-                                );
-                            }
-                        )->paginate(10);
+        $dataFallout = Fallout::when(
+                                    $request->date_start && $request->date_end,
+                                    function (Builder $builder) use ($request) {
+                                        $builder->whereBetween(
+                                            DB::raw('DATE(tanggal_fallout)'),
+                                            [
+                                                $request->date_start,
+                                                $request->date_end,
+                                            ]
+                                        );
+                                    }
+                                )->get();
+
+        // Tambahkan durasi pengerjaan ke dalam data Fallout
+        $dataFallout->each(function ($fallout) {
+            $start = strtotime($fallout->created_at);
+            $end = strtotime($fallout->end_at);
+            $duration = $end - $start; // Hitung durasi dalam detik
+
+            // Simpan durasi pengerjaan dalam detik
+            $fallout->duration_seconds = $duration;
+        });
 
         // Variabel berdasarkan status
         $categories = [
@@ -87,18 +96,6 @@ class DivisionLeaderController extends Controller
 
         // Mengambil jumlah total submisi fallout
         $totalFallout = $dataFallout->count();
-
-        // Tambahkan durasi pengerjaan ke dalam data Fallout
-        $dataFallout = $dataFallout->map(function ($fallout) {
-            $start = strtotime($fallout->created_at);
-            $end = strtotime($fallout->end_at);
-            $duration = $end - $start; // Hitung durasi dalam detik
-
-            // Simpan durasi pengerjaan dalam detik
-            $fallout->duration_seconds = $duration;
-
-            return $fallout;
-        });
 
         // Urutkan pengerjaan fallout berdasarkan durasi pengerjaan tercepat
         $topFallout = $dataFallout->sortBy('duration_seconds')->take(10);

@@ -44,8 +44,8 @@
             <div class="sales"  onclick="toggleFilter('PS (Complete)')">
                 <div class="middle">
                     <div class="left">
-                        <h3 class="ubahwarna-h3-left-dashboardfallout_unitleader">PS (Complete)</h3>
-                        <h1 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{$falloutPs->count()}}</h1>
+                        <h3 class="ubahwarna-h3-left-dashboardfallout_unitleader">PS (Completed)</h3>
+                        <h1 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{ $categories['PS (Completed)'] }}</h1>
                     </div>
                     <div class="progress">
                         <span class="material-icons-sharp">bar_chart</span>
@@ -58,7 +58,7 @@
                 <div class="middle">
                     <div class="left">
                         <h3 class="ubahwarna-h3-left-dashboardfallout_unitleader">PI (Provision Issues)</h3>
-                        <h1 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{$falloutPi->count()}}</h1>
+                        <h1 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{ $categories['PI (Provision Issues)'] }}</h1>
                     </div>
                     <div class="progress">
                         <span class="material-icons-sharp">bar_chart</span>
@@ -71,7 +71,7 @@
                 <div class="middle">
                     <div class="left">
                         <h3 class="ubahwarna-h3-left-dashboardfallout_unitleader">Eskalasi</h3>
-                        <h1 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{$falloutEskalasi->count()}}</h1>
+                        <h1 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{ $categories['Eskalasi'] }}</h1>
                     </div>
                     <div class="progress">
                         <span class="material-icons-sharp">bar_chart</span>
@@ -84,7 +84,7 @@
                 <div class="middle">
                     <div class="left">
                         <h3 class="ubahwarna-h3-left-dashboardfallout_unitleader">Capul / Revoke</h3>
-                        <h1 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{$falloutCapul->count()}}</h1>
+                        <h1 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{ $categories['Capul / Revoke'] }}</h1>
                     </div>
                     <div class="progress">
                         <span class="material-icons-sharp">bar_chart</span>
@@ -100,7 +100,7 @@
                     <div class="content">
                         <div class="content-left">
                             <p class="ubahwarna-p-content-left-dashboardfallout_unitleader"> Total Fallout Telah Tersubmisi </p>
-                            <h2 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{$dataFallout->count()}}</h2>
+                            <h2 class="ubahwarna-h2-content-left-dashboardfallout_unitleader">{{ $totalFallout }}</h2>
                         </div>
                         <div class="content-right">
                             <span class="material-icons-outlined">check_circle </span>
@@ -123,23 +123,25 @@
                             <th>PIC</th>
                             <th>Status</th>
                             <th>KET</th>
+                            <th>Durasi</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($dataFallout as $data)
+                    @foreach ($topFallout as $fallout)
                         <tr>
-                            <td>{{ $data['order_id'] }}</td>
-                            <td>{{ $data['sto'] }}</td>
-                            <td>{{ $data['tanggal_fallout'] }}</td>
-                            <td>{{ $data['pic'] }}</td>
-                            <td>{{ $data['status'] }}</td>
-                            <td>{{ $data['ket'] }}</td>
+                            <td>{{ $fallout->order_id }}</td>
+                            <td>{{ $fallout->sto }}</td>
+                            <td>{{ $fallout->tanggal_fallout }}</td>
+                            <td>{{ $fallout->pic }}</td>
+                            <td>{{ $fallout->status }}</td>
+                            <td>{{ $fallout->ket }}</td>
+                            <td>{{ $fallout->duration_seconds }} detik</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 <br />
-                {{ $dataFallout->links() }}
+                {{-- {{ $dataFallout->links() }} --}}
             </div>
         </div>
     </main>
