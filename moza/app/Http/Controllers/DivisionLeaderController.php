@@ -21,34 +21,48 @@ use App\Charts\DetailKecepatanKaryawanChart;
 
 class DivisionLeaderController extends Controller
 {
-    function dashboardkpi(FalloutStatusChart $falloutStatusChart)
-    {   
-        
-        // Charts
-        // $data[]
-        // Kepentingan Pagination data
-        $pagination = 10;
-        $dataFallout = Fallout::paginate($pagination);
+    public function dashboardkpi(FalloutStatusChart $falloutStatusChart)
+    {
+        // Inisialisasi chart
+        $chart = $falloutStatusChart->build();
 
-        // Variabel berdasarkan status
-        $falloutPi = Fallout::Where('status','PI (Provision Issues)');
-        $falloutPs = Fallout::Where('status','PS (Completed)');
-        $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
-        $falloutCapul = Fallout::Where('status','Capul / Revoke');
+        // Mengambil jumlah total submisi fallout
+        $totalFallout = Fallout::count();
 
-        return view('dashboardkpi',[
-            'falloutStatusChart' => $falloutStatusChart->build(),
+        // Mendapatkan data untuk masing-masing kategori dan jumlahnya
+        $categories = [
+            'PS (Completed)' => Fallout::where('status', 'PS (Completed)')->count(),
+            'PI (Provision Issues)' => Fallout::where('status', 'PI (Provision Issues)')->count(),
+            'Eskalasi' => Fallout::where('status', 'Eskalasi')->count(),
+            'Capul / Revoke' => Fallout::where('status', 'Capul/Revoke')->count()
+        ];
+
+        // Tambahkan durasi pengerjaan ke dalam data Fallout
+        $dataFallout = Fallout::all()->map(function ($fallout) {
+            $start = strtotime($fallout->created_at);
+            $end = strtotime($fallout->end_at);
+            $duration = $end - $start; // Hitung durasi dalam detik
+
+            // Simpan durasi pengerjaan dalam detik
+            $fallout->duration_seconds = $duration;
+
+            return $fallout;
+        });
+
+        // Urutkan pengerjaan fallout berdasarkan durasi pengerjaan tercepat
+        $topFallout = $dataFallout->sortBy('duration_seconds')->take(10);
+
+        return view('dashboardkpi', [
+            'totalFallout' => $totalFallout,
+            'categories' => $categories,
             'dataFallout' => $dataFallout,
-            'falloutPi' => $falloutPi,
-            'falloutPs' => $falloutPs,
-            'falloutEskalasi' => $falloutEskalasi,
-            'falloutCapul' => $falloutCapul
+            'topFallout' => $topFallout,
+            'falloutStatusChart' => $chart
         ]);
     }
 
-    function filtertanggal(FalloutStatusChart $falloutStatusChart, Request $request)
+    public function filtertanggal(FalloutStatusChart $falloutStatusChart, Request $request)
     {   
-        
         $dataFallout = Fallout::select('order_id','sto','tanggal_fallout','pic','status','ket')
                         ->when(
                             $request->date_start && $request->date_end,
@@ -64,21 +78,75 @@ class DivisionLeaderController extends Controller
                         )->paginate(10);
 
         // Variabel berdasarkan status
-        $falloutPi = Fallout::Where('status','PI (Provision Issues)');
-        $falloutPs = Fallout::Where('status','PS (Completed)');
-        $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
-        $falloutCapul = Fallout::Where('status','Capul / Revoke');
+        $categories = [
+            'PS (Completed)' => $dataFallout->where('status', 'PS (Completed)')->count(),
+            'PI (Provision Issues)' => $dataFallout->where('status', 'PI (Provision Issues)')->count(),
+            'Eskalasi' => $dataFallout->where('status', 'Eskalasi')->count(),
+            'Capul / Revoke' => $dataFallout->where('status', 'Capul / Revoke')->count()
+        ];
 
-        return view('dashboardkpi',[
+        // Mengambil jumlah total submisi fallout
+        $totalFallout = $dataFallout->count();
+
+        // Tambahkan durasi pengerjaan ke dalam data Fallout
+        $dataFallout = $dataFallout->map(function ($fallout) {
+            $start = strtotime($fallout->created_at);
+            $end = strtotime($fallout->end_at);
+            $duration = $end - $start; // Hitung durasi dalam detik
+
+            // Simpan durasi pengerjaan dalam detik
+            $fallout->duration_seconds = $duration;
+
+            return $fallout;
+        });
+
+        // Urutkan pengerjaan fallout berdasarkan durasi pengerjaan tercepat
+        $topFallout = $dataFallout->sortBy('duration_seconds')->take(10);
+
+        return view('dashboardkpi', [
             'request' => $request,
+            'totalFallout' => $totalFallout,
+            'categories' => $categories,
             'dataFallout' => $dataFallout,
-            'falloutStatusChart' => $falloutStatusChart->build(),
-            'falloutPi' => $falloutPi,
-            'falloutPs' => $falloutPs,
-            'falloutEskalasi' => $falloutEskalasi,
-            'falloutCapul' => $falloutCapul
+            'topFallout' => $topFallout,
+            'falloutStatusChart' => $falloutStatusChart->build()
         ]);
     }
+
+
+    // function filtertanggal(FalloutStatusChart $falloutStatusChart, Request $request)
+    // {   
+        
+    //     $dataFallout = Fallout::select('order_id','sto','tanggal_fallout','pic','status','ket')
+    //                     ->when(
+    //                         $request->date_start && $request->date_end,
+    //                         function (Builder $builder) use ($request) {
+    //                             $builder->whereBetween(
+    //                                 DB::raw('DATE(tanggal_fallout)'),
+    //                                 [
+    //                                     $request->date_start,
+    //                                     $request->date_end,
+    //                                 ]
+    //                             );
+    //                         }
+    //                     )->paginate(10);
+
+    //     // Variabel berdasarkan status
+    //     $falloutPi = Fallout::Where('status','PI (Provision Issues)');
+    //     $falloutPs = Fallout::Where('status','PS (Completed)');
+    //     $falloutEskalasi = Fallout::Where('status', 'Eskalasi');
+    //     $falloutCapul = Fallout::Where('status','Capul / Revoke');
+
+    //     return view('dashboardkpi',[
+    //         'request' => $request,
+    //         'dataFallout' => $dataFallout,
+    //         'falloutStatusChart' => $falloutStatusChart->build(),
+    //         'falloutPi' => $falloutPi,
+    //         'falloutPs' => $falloutPs,
+    //         'falloutEskalasi' => $falloutEskalasi,
+    //         'falloutCapul' => $falloutCapul
+    //     ]);
+    // }
 
     function adduser()
     {
@@ -150,17 +218,29 @@ class DivisionLeaderController extends Controller
             // Hitung rata-rata kecepatan dalam detik
             $averageDuration = ($totalSubmisi > 0) ? ($totalDuration / $totalSubmisi) : 0;
 
+            // Bulatkan ke dua angka desimal
+            $averageDuration = round($averageDuration, 2);
+
             // Tambahkan informasi ke array data karyawan
             $employee->totalSubmisi = $totalSubmisi;
             $employee->averageDuration = $averageDuration;
         }
+
+        // Filter data karyawan berdasarkan peran
+        $dataemployee = $dataemployee->reject(function ($employee) {
+            return $employee->role == 'Admin';
+        });
+
+        // || $employee->role == 'Division Leader'
+
+        $topEmployees = $dataemployee->sortBy('averageDuration')->take(5);
         
         return view('dashboardkpi2', [
             'dataemployee' => $dataemployee,
+            'topEmployees' => $topEmployees,
             'chart' => $chart
         ]);
     }
-
 
     function dashboardkpi2_filtertanggal(KecepatanKaryawanChart $chart, Request $request)
     {

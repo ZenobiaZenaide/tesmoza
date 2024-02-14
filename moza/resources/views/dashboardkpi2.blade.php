@@ -24,7 +24,12 @@
                         <div class="filter-date">
                             <button class="submit-date" id="submit" value="search">Filter</button>
                         </div>
+                        <div class="filter-date marginmanual-filter-date-dashboardfallout_unitleader">
+                            <a href="{{route('dashboardkpi')}}" class="submit-date" >Reset</a>
+                            <span class="material-icons-sharp marginmanual-restart_alt-dashboardfallout_unitleader">restart_alt</span>
+                        </div>
                     </div>
+                    
                 </form>
                 <div class="dashboard-switch">
                     <div class="switch">
@@ -38,8 +43,35 @@
             </div>
         </div>
 
-        <div class="falloutStatus-Chart">
-            {!! $chart->container() !!}
+        <div class="body-container-dashboardkpi2">
+            <div class="falloutStatus-Chart2">
+                {!! $chart->container() !!}
+            </div>
+                <div class="fallout-table" style="margin-top: 1rem;">
+                        <h2 class="ubahwarna-h2-fallout-table-dashboard_fallout_unitleader">Top 5 Karyawan Tercepat</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Nama</th>
+                                <th>Total Submisi Fallout</th>
+                                <th>Kecepatan Rata - Rata</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($topEmployees as $employee)
+                            <tr>
+                                <td>{{ $employee->id_employee }}</td>
+                                <td>{{ $employee->name }}</td>
+                                <td>{{ $employee->totalSubmisi }}</td>
+                                <td>{{ $employee->averageDuration  }} seconds</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <br />
+                    {{-- {{ $dataFallout->links() }} --}}
+                </div>
         </div>
 
         

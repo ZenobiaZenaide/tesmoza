@@ -23,7 +23,7 @@ class FalloutStatusChart_unitleader
             $falloutData->where('status','Eskalasi')->count(),
             $falloutData->where('status','PI (Provision Issues)')->count(),
             $falloutData->where('status','PS (Completed)')->count(),
-            $falloutData->where('status','Capul / Revoke')->count(),
+            $falloutData->where('status','Capul/Revoke')->count(),
         ];
 
         // Labeling untuk chart

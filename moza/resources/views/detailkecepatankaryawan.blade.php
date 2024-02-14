@@ -10,9 +10,6 @@
         
         <div class="detail-container-1">
             <div class="biodata">
-                <div class="profile-picture">
-                    <div class="circle"></div>
-                </div>
                 <div class="namakaryawan">
                    <h1>{{ $employee->name }}</h1>
                 </div>
@@ -61,6 +58,17 @@
                             <p>{{ $totalSubmisi }} Fallout</p>
                         </div>
                     </div>
+                    <div class="biodata-1">
+                        <div class="biodata-1-judul">
+                            <p>Kecepatan Rata - rata</p>
+                        </div>
+                        <div class="biodata-1-isi">
+                            <div class="titik-dua">
+                                :
+                            </div>
+                            <p>100 Detik</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="kecepatankaryawan-linechart">
@@ -73,6 +81,10 @@
                 <div class="search-bar">
                     <input type="text" id="searchbar" name="searchbar">
                     <span class="material-icons-sharp">search</span>
+                </div>
+                <div class="filter">
+                    <p> Export ke Excel</p>
+                    <span class="material-icons-sharp">save_as</span>
                 </div>
             </div>
             <table>

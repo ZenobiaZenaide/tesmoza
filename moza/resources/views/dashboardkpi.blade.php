@@ -43,7 +43,7 @@
                 <div class="middle">
                     <div class="left">
                         <h3>PS (Complete)</h3>
-                        <h1>11</h1>
+                        <h1>{{ $categories['PS (Completed)'] }}</h1>
                     </div>
                     <div class="progress">
                         <span class="material-icons-sharp">bar_chart</span>
@@ -56,7 +56,7 @@
                 <div class="middle">
                     <div class="left">
                         <h3>PI (Provision Issues)</h3>
-                        <h1>13</h1>
+                        <h1>{{ $categories['PI (Provision Issues)'] }}</h1>
                     </div>
                     <div class="progress">
                         <span class="material-icons-sharp">bar_chart</span>
@@ -69,7 +69,7 @@
                 <div class="middle">
                     <div class="left">
                         <h3>Eskalasi</h3>
-                        <h1>20</h1>
+                        <h1>{{ $categories['Eskalasi'] }}</h1>
                     </div>
                     <div class="progress">
                         <span class="material-icons-sharp">bar_chart</span>
@@ -82,7 +82,7 @@
                 <div class="middle">
                     <div class="left">
                         <h3>Capul / Revoke</h3>
-                        <h1>50</h1>
+                        <h1>{{ $categories['Capul / Revoke'] }}</h1>
                     </div>
                     <div class="progress">
                         <span class="material-icons-sharp">bar_chart</span>
@@ -98,7 +98,7 @@
                     <div class="content">
                         <div class="content-left">
                             <p> Total Fallout Telah Tersubmisi </p>
-                            <h2> 20 </h2>
+                            <h2>{{ $totalFallout }}</h2>
                         </div>
                         <div class="content-right">
                             <span class="material-icons-outlined">check_circle </span>
@@ -121,23 +121,25 @@
                             <th>PIC</th>
                             <th>Status</th>
                             <th>KET</th>
+                            <th>Durasi</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($dataFallout as $data)
+                    @foreach ($topFallout as $fallout)
                         <tr>
-                            <td>{{ $data['order_id'] }}</td>
-                            <td>{{ $data['sto'] }}</td>
-                            <td>{{ $data['tanggal_fallout'] }}</td>
-                            <td>{{ $data['pic'] }}</td>
-                            <td>{{ $data['status'] }}</td>
-                            <td>{{ $data['ket'] }}</td>
+                            <td>{{ $fallout->order_id }}</td>
+                            <td>{{ $fallout->sto }}</td>
+                            <td>{{ $fallout->tanggal_fallout }}</td>
+                            <td>{{ $fallout->pic }}</td>
+                            <td>{{ $fallout->status }}</td>
+                            <td>{{ $fallout->ket }}</td>
+                            <td>{{ $fallout->duration_seconds }} detik</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 <br />
-                {{ $dataFallout->links() }}
+                {{-- {{ $dataFallout->links() }} --}}
             </div>
         </div>
     </main>
